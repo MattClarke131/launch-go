@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_184332) do
+ActiveRecord::Schema.define(version: 2018_08_05_195320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "challenges", force: :cascade do |t|
+    t.integer "min_rank", default: -30
+    t.integer "max_rank", default: 9
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_challenges_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
