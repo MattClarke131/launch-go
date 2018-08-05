@@ -8,5 +8,6 @@ http://www.usgo.org/what-go
 
 Stack:
 * postgreSQL
-* Ruby on Rails
+* Ruby (2.3.3)
+* Rails (5.2)
 * React
