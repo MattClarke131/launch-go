@@ -41,7 +41,11 @@ describe('ChallengesContainer', () => {
 
   afterEach(fetchMock.restore)
 
-  describe('Visitor Challenges Index Page', () => {
+  describe('Visitor: Challenges Page', () => {
+    it('renders', () => {
+      expect(wrapper.exists()).toBe(true)
+    })
+
     it('has an initial state', () => {
       expect(wrapper.state()).toEqual({
         challenges: []
