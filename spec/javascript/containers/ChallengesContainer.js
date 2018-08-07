@@ -54,18 +54,20 @@ describe('ChallengesContainer', () => {
 
     it('updates state after a fetch request', (done) => {
       setTimeout(() => {
-        expect(wrapper.state()).toEqual({
-          challenges
-        })
+        expect(wrapper.state()).toEqual(challenges)
         done()
       })
     }, 0)
 
-    it('displays a challenge tile', (done) => {
-      setTimeout(() => {
-        expect(wrapper.contains(<ChallengeTile />)).toEqual(true)
-        done()
+    describe('displays a challenge tile', () => {
+
+      it('challenge tile exists', (done) => {
+        setTimeout(() => {
+          expect(wrapper.contains(<ChallengeTile />)).toEqual(true)
+          done()
+        })
+      }, 0)
       })
-    }, 0)
+    })
   })
 })
