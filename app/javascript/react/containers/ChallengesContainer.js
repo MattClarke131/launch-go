@@ -8,7 +8,17 @@ class ChallengesContainer extends React.Component {
     this.state = {
       challenges: []
     }
+    this.formatRank = this.formatRank.bind(this)
   }
+
+  formatRank(rank) {
+    if(rank < 0) {
+      return `${rank}K`
+    } else {
+      return `${rank}D`
+    }
+  }
+
 
   componentDidMount() {
     fetch('/api/v1/challenges.json')
@@ -33,16 +43,19 @@ class ChallengesContainer extends React.Component {
         <ChallengeTile
           key={this.state.challenges.indexOf(challenge)}
           userEmail={challenge.user.email}
-          userRank={challenge.user.rank}
-          minRank={challenge.min_rank}
-          maxRank={challenge.max_rank}
+          userRank={this.formatRank(challenge.user.rank)}
+          minRank={this.formatRank(challenge.min_rank)}
+          maxRank={this.formatRank(challenge.max_rank)}
         />
       )
     })
 
     return(
-      <div>
-        {challenges}
+      <div className='challenges-container'>
+        <h1>Open Challenges</h1>
+        <div className='challenges-box'>
+          {challenges}
+        </div>
       </div>
     )
   }
