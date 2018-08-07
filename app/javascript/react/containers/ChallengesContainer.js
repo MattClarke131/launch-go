@@ -32,6 +32,10 @@ class ChallengesContainer extends React.Component {
       return (
         <ChallengeTile
           key={this.state.challenges.indexOf(challenge)}
+          userEmail={challenge.user.email}
+          userRank={challenge.user.rank}
+          minRank={challenge.min_rank}
+          maxRank={challenge.max_rank}
         />
       )
     })

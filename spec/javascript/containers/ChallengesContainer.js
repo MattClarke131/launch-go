@@ -62,7 +62,16 @@ describe('ChallengesContainer', () => {
     describe('displays a challenge tile', () => {
       it('challenge tile exists', (done) => {
         setTimeout(() => {
-          expect(wrapper.contains(<ChallengeTile />)).toEqual(true)
+          let challenge = challenges['challenges'][0]
+          let challengeTile =
+            <ChallengeTile
+              userEmail={challenge.user.email}
+              userRank={challenge.user.rank}
+              minRank={challenge.min_rank}
+              maxRank={challenge.max_rank}
+            />
+
+          expect(wrapper.contains(challengeTile)).toEqual(true)
           done()
         })
       }, 0)
