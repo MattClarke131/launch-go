@@ -1,5 +1,7 @@
 import React from 'react'
 
+import ChallengeTile from '../components/ChallengeTile'
+
 class ChallengesContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -21,16 +23,22 @@ class ChallengesContainer extends React.Component {
     })
     .then(response => response.json())
     .then(response => {
-      this.setState({
-        challenges: response
-      })
+      this.setState(response)
     })
   }
 
   render() {
+    let challenges = this.state.challenges.map(challenge => {
+      return (
+        <ChallengeTile
+          key={this.state.challenges.indexOf(challenge)}
+        />
+      )
+    })
+
     return(
       <div>
-        ChallengesContainer
+        {challenges}
       </div>
     )
   }

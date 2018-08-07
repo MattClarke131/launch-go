@@ -1,8 +1,10 @@
-import ChallengesContainer from '../../../app/javascript/react/containers/ChallengesContainer';
 import { mount } from 'enzyme';
 import jasmineEnzyme from 'jasmine-enzyme';
 import React from 'react';
 import fetchMock from 'fetch-mock';
+
+import ChallengesContainer from '../../../app/javascript/react/containers/ChallengesContainer';
+import ChallengeTile from '../../../app/javascript/react/components/ChallengeTile';
 
 describe('ChallengesContainer', () => {
   let wrapper;
@@ -44,7 +46,6 @@ describe('ChallengesContainer', () => {
       expect(wrapper.state()).toEqual({
         challenges: []
       })
-      expect(false).toEqual(false)
     })
 
     it('updates state after a fetch request', (done) => {
@@ -52,8 +53,15 @@ describe('ChallengesContainer', () => {
         expect(wrapper.state()).toEqual({
           challenges
         })
+        done()
       })
-      done()
+    }, 0)
+
+    it('displays a challenge tile', (done) => {
+      setTimeout(() => {
+        expect(wrapper.contains(<ChallengeTile />)).toEqual(true)
+        done()
+      })
     }, 0)
   })
 })
