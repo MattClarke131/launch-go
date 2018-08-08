@@ -11,8 +11,6 @@ RSpec.describe Api::V1::ChallengesController, type: :controller do
       get :index
       returned_json = JSON.parse(response.body)
 
-
-
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
 
