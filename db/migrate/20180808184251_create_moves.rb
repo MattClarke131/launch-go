@@ -7,6 +7,8 @@ class CreateMoves < ActiveRecord::Migration[5.2]
       t.integer :move_number, null: false
       t.boolean :is_pass, null: false
 
+      t.belongs_to :game
+
       t.timestamps
     end
 

@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 2018_08_08_184251) do
     t.integer "y"
     t.integer "move_number", null: false
     t.boolean "is_pass", null: false
+    t.bigint "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_moves_on_game_id"
     t.index ["move_number"], name: "index_moves_on_move_number"
   end
 
