@@ -16,7 +16,7 @@ RSpec.describe Api::V1::GamesController, type: :controller do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
 
-      expect(returned_json['id']).to eq(game_1.id)
+      expect(returned_json['game']['id']).to eq(game_1.id)
     end
 
     it 'should return moves associated with the game' do
@@ -29,7 +29,7 @@ RSpec.describe Api::V1::GamesController, type: :controller do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
 
-      expect(returned_json[:moves].length).to eq(game_1.moves.length)
+      expect(returned_json['game']['moves'].length).to eq(game_1.moves.length)
     end
   end
 end
