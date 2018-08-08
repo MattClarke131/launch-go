@@ -28,6 +28,14 @@ describe('ChallengesContainer', () => {
       }
     ]
   }
+  let formatRank = (rank) => {
+    if(rank < 0) {
+      return `${rank}K`
+    } else {
+      return `${rank}D`
+    }
+  }
+
 
   beforeEach(() => {
     fetchMock.get(`/api/v1/challenges.json`, {
@@ -66,9 +74,9 @@ describe('ChallengesContainer', () => {
           let challengeTile =
             <ChallengeTile
               userEmail={challenge.user.email}
-              userRank={challenge.user.rank}
-              minRank={challenge.min_rank}
-              maxRank={challenge.max_rank}
+              userRank={formatRank(challenge.user.rank)}
+              minRank={formatRank(challenge.min_rank)}
+              maxRank={formatRank(challenge.max_rank)}
             />
 
           expect(wrapper.contains(challengeTile)).toEqual(true)
