@@ -7,10 +7,7 @@ RSpec.describe Api::V1::GamesController, type: :controller do
 
   describe 'GET#show' do
     it 'should return the correct game' do
-      get :show, params: {
-        id: game_1.id,
-        game: { id: game_1.id }
-      }
+      get :show, params: { id: game_1.id }
       returned_json = JSON.parse(response.body)
 
       expect(response.status).to eq 200
@@ -20,10 +17,7 @@ RSpec.describe Api::V1::GamesController, type: :controller do
     end
 
     it 'should return moves associated with the game' do
-      get :show, params: {
-        id: game_1.id,
-        game: { id: game_1.id }
-      }
+      get :show, params: { id: game_1.id }
       returned_json = JSON.parse(response.body)
 
       expect(response.status).to eq 200
