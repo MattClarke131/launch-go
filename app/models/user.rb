@@ -10,4 +10,6 @@ class User < ApplicationRecord
     less_than_or_equal_to: 9,
     other_than: 0
   }
+
+  has_one :challenge
 end
