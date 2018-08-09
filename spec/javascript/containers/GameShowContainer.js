@@ -14,7 +14,7 @@ describe('GameShowContainer', () => {
       id: 361,
       player_black: 'Lee Sedol',
       player_white: 'Gu Li',
-      board_state: SampleBoard.create(9),
+      board_state: JSON.stringify(SampleBoard.create(9)),
       player_turn: 'black',
       move_number: 55,
       size: 9
