@@ -1,4 +1,5 @@
 import React from 'react'
+import BoardContainer from './BoardContainer'
 
 class GameShowContainer extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class GameShowContainer extends React.Component {
       <div className='game-show-container'>
         <BoardContainer
           size={this.state.game.size}
+          board_state={this.state.game.board_state}
         />
       </div>
     )
