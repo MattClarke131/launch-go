@@ -11,7 +11,9 @@ Challenge.create!(
 
 FactoryBot.create_list(:challenge, 20)
 
-Game.create()
+Game.create(
+  size: 9
+)
 
 Move.create(
   move_number: 1,
