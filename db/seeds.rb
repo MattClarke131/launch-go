@@ -1,5 +1,3 @@
-require 'faker'
-
 User.create!(
   email: "1@1",
   password: "111111",
