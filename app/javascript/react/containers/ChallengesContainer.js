@@ -1,5 +1,4 @@
 import React from 'react'
-
 import ChallengeTile from '../components/ChallengeTile'
 
 class ChallengesContainer extends React.Component {

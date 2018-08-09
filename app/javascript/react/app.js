@@ -11,6 +11,9 @@ export const App = (props) => {
           <Route path='/challenges'>
             <IndexRoute component={ChallengesContainer} />
           </Route>
+          <Route path='/games'>
+            <Route path= "/:id" component={GameShowContainer} />
+          </Route>
         </Route>
       </Router>
     </div>
