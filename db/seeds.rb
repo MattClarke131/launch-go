@@ -11,11 +11,14 @@ Challenge.create!(
 
 FactoryBot.create_list(:challenge, 20)
 
-Game.create(
+game1 = Game.new(
   size: 9
 )
+game1.save!
 
-Move.create(
+FactoryBot.create_list(:board_state, 5, game: game1)
+
+Move.create!(
   move_number: 1,
   color: 'black',
   is_pass: false,
@@ -23,7 +26,7 @@ Move.create(
   y: 4,
   game: Game.last
 )
-Move.create(
+Move.create!(
   move_number: 2,
   color: 'white',
   is_pass: false,
@@ -31,7 +34,7 @@ Move.create(
   y: 5,
   game: Game.last
 )
-Move.create(
+Move.create!(
   move_number: 3,
   color: 'black',
   is_pass: false,
@@ -39,7 +42,7 @@ Move.create(
   y: 4,
   game: Game.last
 )
-Move.create(
+Move.create!(
   move_number: 4,
   color: 'white',
   is_pass: false,
