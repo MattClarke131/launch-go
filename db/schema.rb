@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2018_08_09_200000) do
 
   create_table "board_states", force: :cascade do |t|
     t.integer "move_number"
+    t.integer "size", default: 9
     t.text "board"
     t.bigint "game_id"
     t.index ["game_id"], name: "index_board_states_on_game_id"
