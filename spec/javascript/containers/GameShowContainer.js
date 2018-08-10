@@ -14,7 +14,7 @@ describe('GameShowContainer', () => {
       id: 361,
       player_black: 'Lee Sedol',
       player_white: 'Gu Li',
-      board_state: JSON.stringify(SampleBoard.create(9)),
+      board_states: [JSON.stringify(SampleBoard.create(9))],
       player_turn: 'black',
       move_number: 55,
       size: 9
@@ -46,7 +46,7 @@ describe('GameShowContainer', () => {
           id: response.game.id,
           player_black: '',
           player_white: '',
-          board_state: [],
+          board_states: [],
           player_turn: 'black',
           move_number: 1,
           size: 9
@@ -61,7 +61,7 @@ describe('GameShowContainer', () => {
         expect(wrapper.state().game.player_white).toEqual(response.game.player_white)
         expect(wrapper.state().game.player_turn).toEqual(response.game.player_turn)
         expect(wrapper.state().game.move_number).toEqual(response.game.move_number)
-        expect(wrapper.state().game.board_state[0]).toEqual(response.game.board_state[0])
+        expect(wrapper.state().game.board_states[0]).toEqual(response.game.board_states[0])
         done()
       }, 0)
     })
