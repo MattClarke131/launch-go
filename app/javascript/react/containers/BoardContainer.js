@@ -21,13 +21,17 @@ class BoardContainer extends React.Component {
       })
 
       return (
-        <div key={`row: ${y}`} className='gameRow'>
+        <div key={`row: ${y}`} className='game-row'>
           {populatedRow}
         </div>
       )
     })
 
-    return board
+    return (
+      <div className='game-board'>
+        {board}
+      </div>
+    )
   }
 
   render() {

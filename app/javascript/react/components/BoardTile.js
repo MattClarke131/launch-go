@@ -2,7 +2,7 @@ import React from 'react'
 
 const BoardTile = (props) => {
   return(
-    <div className='BoardTile'>
+    <div className='board-tile'>
       {props.color}
     </div>
   )

@@ -37,3 +37,6 @@ coverage/*
 
 # Ignore plan.txt
 plan.txt
+
+# Ignore actually_temp
+actually_temp/*
