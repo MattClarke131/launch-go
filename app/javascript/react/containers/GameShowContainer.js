@@ -1,5 +1,6 @@
 import React from 'react'
 import BoardContainer from './BoardContainer'
+import GameInfoTile from '../components/GameInfoTile'
 
 class GameShowContainer extends React.Component {
   constructor(props) {
@@ -58,6 +59,9 @@ class GameShowContainer extends React.Component {
     }
     return(
       <div className='game-show-container'>
+        <GameInfoTile
+
+        />
         <BoardContainer
           size={this.state.game.size}
           boardState={boardState}
