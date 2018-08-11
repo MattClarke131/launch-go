@@ -33,7 +33,7 @@ class GameShowContainer extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/games/1`)
+    fetch(`/api/v1/games/${this.props.params.id}`)
     .then(response => {
       if(response.ok) {
         return response;
