@@ -22,7 +22,7 @@ describe('GameShowContainer', () => {
   }
 
   beforeEach(() => {
-    fetchMock.get(`/api/v1/games/1`, {
+    fetchMock.get(`/api/v1/games/${response.game.id}`, {
       status: 200,
       body: response
     });
