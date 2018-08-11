@@ -28,7 +28,7 @@ describe('GameShowContainer', () => {
     });
     wrapper = mount(
       <GameShowContainer
-        game_id={response.game.id}
+        params={{id: response.game.id}}
       />
     )
   });

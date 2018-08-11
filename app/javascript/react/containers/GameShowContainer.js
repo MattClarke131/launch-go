@@ -6,7 +6,7 @@ class GameShowContainer extends React.Component {
     super(props);
     this.state = {
       game: {
-        id: props.game_id,
+        id: props.params.id,
         player_black: '',
         player_white: '',
         board_states: [],
