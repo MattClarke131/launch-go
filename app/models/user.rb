@@ -12,4 +12,6 @@ class User < ApplicationRecord
   }
 
   has_one :challenge
+  has_many :pairings
+  has_many :games, through: :pairings
 end
