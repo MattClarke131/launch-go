@@ -8,20 +8,29 @@ class BoardContainer extends React.Component {
   }
 
   createGameBoard() {
-    let board = this.props.boardState.map((row, y) => {
-      let populatedRow = row.map((item, x) => {
+
+    let board = this.props.boardState.map((row, x) => {
+      let populatedRow = row.map((item, y) => {
+        let bottom = y+1 === this.props.boardState.length
+        let top = y+1 === 1
+        let left = x+1 === 1
+        let right = x+1 === this.props.boardState.length
         return (
           <BoardTile
-            key={`x:${x+1},y:${y+1}`}
+            key={`x:${x+1},y:${this.props.boardState.length-y}`}
             x={x+1}
-            y={y+1}
+            y={this.props.boardState.length-y}
             color={item}
+            top={top}
+            bottom={bottom}
+            left={left}
+            right={right}
           />
         )
       })
 
       return (
-        <div key={`row: ${y}`} className='game-row'>
+        <div key={`row: ${x}`} className='game-row'>
           {populatedRow}
         </div>
       )
