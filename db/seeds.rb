@@ -9,12 +9,7 @@ Challenge.create!(
 
 FactoryBot.create_list(:challenge, 20)
 
-game1 = Game.new(
-  size: 9
-)
-game1.save!
-
-FactoryBot.create_list(:board_state, 5, game: game1)
+FactoryBot.create_list(:game, 20, size: 9)
 
 Move.create!(
   move_number: 1,
