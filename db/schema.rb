@@ -10,16 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_195320) do
+ActiveRecord::Schema.define(version: 2018_08_09_200000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "board_states", force: :cascade do |t|
+    t.integer "move_number"
+    t.integer "size", default: 9
+    t.text "board"
+    t.bigint "game_id"
+    t.index ["game_id"], name: "index_board_states_on_game_id"
+  end
 
   create_table "challenges", force: :cascade do |t|
     t.integer "min_rank", default: -30
     t.integer "max_rank", default: 9
     t.bigint "user_id"
     t.index ["user_id"], name: "index_challenges_on_user_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "size", null: false
+  end
+
+  create_table "moves", force: :cascade do |t|
+    t.string "color", null: false
+    t.integer "x"
+    t.integer "y"
+    t.integer "move_number", null: false
+    t.boolean "is_pass", null: false
+    t.bigint "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_moves_on_game_id"
+    t.index ["move_number"], name: "index_moves_on_move_number"
   end
 
   create_table "users", force: :cascade do |t|
