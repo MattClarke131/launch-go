@@ -1,21 +1,15 @@
-// colors
-$this-thing: #FFEFDF;
-
-$board-color: $this-thing;
-
+$board-color: #F7E0B0;
 
 .game-show-container {
   margin: 10%;
 }
 
 .game-board {
-  background-color: yellow;
   width: 640px;
   height: 640px;
 }
 
 .game-row {
-  background-color: blue;
   float: left;
   height: 11.11111111%;
   width: 11.11111111%;
@@ -48,35 +42,33 @@ $board-color: $this-thing;
   }
 }
 
-.board-tile-up-left {
+@mixin subtile() {
   background-color: $board-color;
-  float: left;
   height: 50%;
   width: 50%;
+}
+
+.board-tile-up-left {
+  @include subtile();
+  float: left;
   right: 50%;
   bottom: 50%;
 }
 .board-tile-up-right {
-  background-color: $board-color;
+  @include subtile();
   float: right;
-  height: 50%;
-  width: 50%;
   left: 50%;
   bottom: 50%;
 }
 .board-tile-down-left {
-  background-color: $board-color;
+  @include subtile();
   float: left;
-  height: 50%;
-  width: 50%;
   right: 50%;
   top: 50%;
 }
 .board-tile-down-right {
-  background-color: $board-color;
+  @include subtile();
   float: right;
-  height: 50%;
-  width: 50%;
   left: 50%;
   top: 50%;
 }
