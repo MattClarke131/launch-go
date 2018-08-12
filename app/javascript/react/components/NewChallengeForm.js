@@ -26,16 +26,20 @@ class NewChallengeForm extends React.Component {
   render() {
     return (
       <form className='new-challenge-form'>
-        <SelectTile
-          value={this.state.minRank}
-          label={'Min. Rank'}
-          handleChange={this.handleMinChange}
-        />
-        <SelectTile
-          value={this.state.maxRank}
-          label={'Max. Rank'}
-          handleChange={this.handleMaxChange}
-        />
+        <label>
+          Create a new challenge:
+          <SelectTile
+            value={this.state.minRank}
+            label={'Min. Rank'}
+            handleChange={this.handleMinChange}
+          />
+          <SelectTile
+            value={this.state.maxRank}
+            label={'Max. Rank'}
+            handleChange={this.handleMaxChange}
+          />
+        </label>
+        <input type='submit' value='submit' />
       </form>
     )
   }
