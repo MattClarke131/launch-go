@@ -12,9 +12,9 @@ class ChallengesContainer extends React.Component {
 
   formatRank(rank) {
     if(rank < 0) {
-      return `${rank}K`
+      return `${Math.abs(rank)}K`
     } else {
-      return `${rank}D`
+      return `${Math.abs(rank)}D`
     }
   }
 
