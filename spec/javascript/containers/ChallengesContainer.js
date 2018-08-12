@@ -68,22 +68,6 @@ describe('ChallengesContainer', () => {
     }, 0)
 
     describe('displays a challenge tile', () => {
-      it('challenge tile exists', (done) => {
-        setTimeout(() => {
-          let challenge = challenges['challenges'][0]
-          let challengeTile =
-            <ChallengeTile
-              userEmail={challenge.user.email}
-              userRank={formatRank(challenge.user.rank)}
-              minRank={formatRank(challenge.min_rank)}
-              maxRank={formatRank(challenge.max_rank)}
-            />
-
-          expect(wrapper.contains(challengeTile)).toEqual(true)
-          done()
-        })
-      }, 0)
-
       it('challenge tile contains populated data', (done) => {
         setTimeout(() => {
           let challenge1MinRank = challenges['challenges'][0]['min_rank']
