@@ -6,5 +6,26 @@ class Api::V1::ChallengesController < ApplicationController
   end
 
   def create
+    user = User.find_by email: challenge_params[:userEmail]
+    challenge = Challenge.new(
+      user: user,
+      min_rank: challenge_params[:minRank],
+      max_rank: challenge_params[:maxRank]
+    )
+    if challenge.save
+      render json: {
+        challenge: challenge, errors: []
+      }
+    else
+      render json: {
+        challenge: {},
+        errors: chalenge.errors.full_messages
+      }
+    end
+
+  end
+
+  def challenge_params
+    params.require(:challenge).permit(:minRank, :maxRank, :userEmail)
   end
 end
