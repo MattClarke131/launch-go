@@ -1,6 +1,6 @@
 User.create!(
-  email: "1@1",
-  password: "111111",
+  email: "2@2",
+  password: "222222",
   is_admin: true
 )
 Challenge.create!(
