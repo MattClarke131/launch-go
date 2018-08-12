@@ -28,7 +28,7 @@ describe('GameShowContainer', () => {
     });
     wrapper = mount(
       <GameShowContainer
-        game_id={response.game.id}
+        params={{id: response.game.id}}
       />
     )
   });
@@ -44,12 +44,14 @@ describe('GameShowContainer', () => {
       expect(wrapper.state()).toEqual({
         game: {
           id: response.game.id,
-          player_black: '',
-          player_white: '',
           board_states: [],
           player_turn: 'black',
           move_number: 1,
-          size: 9
+          size: 9,
+          players: {
+            black: '',
+            white: ''
+          }
         }
       })
     })

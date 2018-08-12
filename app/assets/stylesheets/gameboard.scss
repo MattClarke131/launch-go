@@ -1,0 +1,165 @@
+// import from games
+@import 'games';
+
+.game-board {
+  margin: 0 auto;
+  width: 640px;
+  height: 640px;
+}
+
+.game-row {
+  float: left;
+  height: 11.11111111%;
+  width: 11.11111111%;
+}
+
+.board-tile {
+  // border: 1px solid red;
+  position: relative;
+  z-index: 0;
+  // background-color: green;
+  // border: .5px solid red;
+  .stone-white {
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 100%;
+    background-color: white;
+    color: black;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+  }
+  .stone-black {
+    position: absolute;
+    border-radius: 100%;
+    background-color: black;
+    color: black;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@mixin subtile() {
+  background-color: $board-color;
+  height: 50%;
+  width: 50%;
+}
+
+.board-tile-up-left {
+  @include subtile();
+  float: left;
+  right: 50%;
+  bottom: 50%;
+}
+.board-tile-up-right {
+  @include subtile();
+  float: right;
+  left: 50%;
+  bottom: 50%;
+}
+.board-tile-down-left {
+  @include subtile();
+  float: left;
+  right: 50%;
+  top: 50%;
+}
+.board-tile-down-right {
+  @include subtile();
+  float: right;
+  left: 50%;
+  top: 50%;
+}
+
+.board-tile-side-top {
+  .board-tile-down-left,
+  .board-tile-down-right {
+    border-top: 1px solid black;
+  }
+  .board-tile-down-left {
+    border-right: 1px solid black;
+  }
+}
+
+.board-tile-center {
+  .board-tile-down-left,
+  .board-tile-down-right {
+    border-top: 1px solid black;
+  }
+  .board-tile-down-left {
+    border-right: 1px solid black;
+  }
+  .board-tile-up-left {
+    border-right: 1px solid black;
+  }
+}
+
+.board-tile-side-left {
+  .board-tile-down-right {
+    border-top: 1px solid black;
+  }
+  .board-tile-down-left {
+    border-right: 1px solid black;
+  }
+  .board-tile-up-left {
+    border-right: 1px solid black;
+  }
+}
+
+.board-tile-side-right {
+  .board-tile-down-left {
+    border-top: 1px solid black;
+  }
+  .board-tile-down-left {
+    border-right: 1px solid black;
+  }
+  .board-tile-up-left {
+    border-right: 1px solid black;
+  }
+}
+
+.board-tile-side-bottom {
+  .board-tile-down-left,
+  .board-tile-down-right {
+    border-top: 1px solid black;
+  }
+  .board-tile-up-left {
+    border-right: 1px solid black;
+  }
+}
+
+.board-tile-top-left {
+  .board-tile-down-right {
+    border-top: 1px solid black;
+  }
+  .board-tile-down-left {
+    border-right: 1px solid black;
+  }
+}
+
+.board-tile-top-right {
+  .board-tile-down-left {
+    border-right: 1px solid black;
+  }
+  .board-tile-down-left {
+    border-top: 1px solid black;
+  }
+}
+
+.board-tile-bottom-left {
+  .board-tile-up-left {
+    border-right: 1px solid black;
+  }
+  .board-tile-down-right {
+    border-top: 1px solid black;
+  }
+}
+
+.board-tile-bottom-right {
+  .board-tile-up-left {
+    border-right: 1px solid black;
+  }
+  .board-tile-down-left {
+    border-top: 1px solid black;
+  }
+}

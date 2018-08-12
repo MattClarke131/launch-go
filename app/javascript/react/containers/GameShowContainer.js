@@ -1,18 +1,21 @@
 import React from 'react'
 import BoardContainer from './BoardContainer'
+import GameInfoTile from '../components/GameInfoTile'
 
 class GameShowContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       game: {
-        id: props.game_id,
-        player_black: '',
-        player_white: '',
+        id: props.params.id,
         board_states: [],
         player_turn: 'black',
         move_number: 1,
-        size: 9
+        size: 9,
+        players: {
+          black: '',
+          white: ''
+        }
       }
     }
     this.generateEmptyBoardState = this.generateEmptyBoardState.bind(this)
@@ -58,6 +61,10 @@ class GameShowContainer extends React.Component {
     }
     return(
       <div className='game-show-container'>
+        <GameInfoTile
+          player_black={this.state.game.players.black}
+          player_white={this.state.game.players.white}
+        />
         <BoardContainer
           size={this.state.game.size}
           boardState={boardState}
