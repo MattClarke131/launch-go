@@ -10,6 +10,7 @@ class ChallengesContainer extends React.Component {
     }
     this.formatRank = this.formatRank.bind(this)
     this.userHasAChallenge = this.userHasAChallenge.bind(this)
+    this.addNewChallenge = this.addNewChallenge.bind(this)
   }
 
   formatRank(rank) {
@@ -29,6 +30,12 @@ class ChallengesContainer extends React.Component {
     })
 
     return challenge_exists
+  }
+
+  addNewChallenge(newChallenge) {
+    let challenges = this.state.challenges
+    challenges.push(newChallenge)
+    this.setState(challenges)
   }
 
   componentDidMount() {
