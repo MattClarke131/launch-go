@@ -27,7 +27,10 @@ class NewChallengeForm extends React.Component {
     return (
       <form className='new-challenge-form'>
         <label>
-          Create a new challenge:
+          <h3>
+            Create a new challenge:
+          </h3>
+          <br />
           <SelectTile
             value={this.state.minRank}
             label={'Min. Rank'}
@@ -38,8 +41,8 @@ class NewChallengeForm extends React.Component {
             label={'Max. Rank'}
             handleChange={this.handleMaxChange}
           />
+          <input className ='button challenge-submit' type='submit' value='submit' />
         </label>
-        <input type='submit' value='submit' />
       </form>
     )
   }

@@ -1,5 +1,32 @@
 @import 'master';
 
+
+form.new-challenge-form {
+
+
+  label {
+  // position
+    margin: 4% 15%;
+    height: 15%;
+
+    // color
+    background-color: $secondary-background;
+
+    // children
+    .select-tile {
+      background-color: rgba(0, 0, 0, 0);
+      margin: 0%;
+      margin-left: 10%;
+      display: inline;
+      float: left;
+    }
+
+    .challenge-submit {
+      display: inline;
+    }
+  }
+}
+
 div.challenges-container {
   // position
   text-align: center;

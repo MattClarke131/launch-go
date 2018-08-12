@@ -17,7 +17,7 @@ const SelectTile = (props) => {
   }
 
   return(
-    <label>
+    <label className='select-tile'>
       {props.label}
       <select value={props.value} onChange={props.handleChange}>
         {options}
