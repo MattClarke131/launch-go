@@ -1,5 +1,6 @@
 import React from 'react'
 import ChallengeTile from '../components/ChallengeTile'
+import NewChallengeForm from '../components/NewChallengeForm'
 
 class ChallengesContainer extends React.Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class ChallengesContainer extends React.Component {
 
     return(
       <div className='challenges-container'>
+        <NewChallengeForm />
         <h1>Open Challenges</h1>
         <div className='challenges-box'>
           {challenges}
