@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectTile from './SelectTile'
+import SelectTile from '../components/SelectTile'
 
 class NewChallengeForm extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import ChallengeTile from '../components/ChallengeTile'
-import NewChallengeForm from '../components/NewChallengeForm'
+import NewChallengeForm from './NewChallengeForm'
 
 class ChallengesContainer extends React.Component {
   constructor(props) {
