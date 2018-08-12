@@ -1,5 +1,6 @@
 class Api::V1::ChallengesController < ApplicationController
   def index
-    render json: Challenge.all 
+    @challenges = Challenge.all
+    render json: @challenges, each_serializer: ChallengeSerializer
   end
 end
