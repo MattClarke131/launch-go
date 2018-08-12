@@ -1,10 +1,11 @@
 import React from 'react';
+import SelectTile from './SelectTile'
 
 const NewChallengeForm = (props) => {
   return (
-    <div className='new-challenge-form'>
-      
-    </div>
+    <form className='new-challenge-form'>
+      <SelectTile />
+    </form>
   )
 }
 
