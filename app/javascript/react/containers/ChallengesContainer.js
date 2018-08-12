@@ -1,5 +1,6 @@
 import React from 'react'
 import ChallengeTile from '../components/ChallengeTile'
+import NewChallengeForm from '../components/NewChallengeForm'
 
 class ChallengesContainer extends React.Component {
   constructor(props) {
@@ -12,9 +13,9 @@ class ChallengesContainer extends React.Component {
 
   formatRank(rank) {
     if(rank < 0) {
-      return `${rank}K`
+      return `${Math.abs(rank)}K`
     } else {
-      return `${rank}D`
+      return `${Math.abs(rank)}D`
     }
   }
 
@@ -51,6 +52,7 @@ class ChallengesContainer extends React.Component {
 
     return(
       <div className='challenges-container'>
+        <NewChallengeForm />
         <h1>Open Challenges</h1>
         <div className='challenges-box'>
           {challenges}
