@@ -10,6 +10,7 @@ class NewChallengeForm extends React.Component {
     }
     this.handleMinChange = this.handleMinChange.bind(this)
     this.handleMaxChange = this.handleMaxChange.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
   handleMinChange(event) {
@@ -23,9 +24,40 @@ class NewChallengeForm extends React.Component {
     })
   }
 
+  handleFormSubmit(event) {
+    event.preventDefault();
+    let formPayload = {
+      challenge: {
+        minRank: this.state.minRank,
+        maxRank: this.state.maxRank,
+        userEmail: this.props.currentUser.email
+      }
+    }
+    fetch('/api/v1/challenges.json', {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify(formPayload),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+      if(response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`
+        let error = new Error(errorMessage)
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+
   render() {
     return (
-      <form className='new-challenge-form'>
+      <form className='new-challenge-form' onSubmit={this.handleFormSubmit}>
         <label>
           <h3>
             Create a new challenge:
