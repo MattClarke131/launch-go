@@ -8,12 +8,14 @@ class GameShowContainer extends React.Component {
     this.state = {
       game: {
         id: props.params.id,
-        player_black: '',
-        player_white: '',
         board_states: [],
         player_turn: 'black',
         move_number: 1,
-        size: 9
+        size: 9,
+        players: {
+          black: '',
+          white: ''
+        }
       }
     }
     this.generateEmptyBoardState = this.generateEmptyBoardState.bind(this)

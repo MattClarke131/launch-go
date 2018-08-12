@@ -15,11 +15,11 @@ class GameSerializer < ActiveModel::Serializer
   end
 
   def players
-    players = object.pairings.map do |pairing|
-      {
+    players = {}
+    object.pairings.each do |pairing|
+      players["#{pairing.color}"] = {
         email: pairing.user.email,
         rank: pairing.user.rank,
-        color: pairing.color
       }
     end
 
