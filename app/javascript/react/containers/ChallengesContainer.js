@@ -24,7 +24,7 @@ class ChallengesContainer extends React.Component {
   userHasAChallenge() {
     let challenge_exists = false
     this.state.challenges.forEach((challenge) => {
-      if(challenge.current_user == challenge.user.email) {
+      if(challenge.current_user.email == challenge.user.email) {
         challenge_exists = true
       }
     })
@@ -68,13 +68,17 @@ class ChallengesContainer extends React.Component {
       )
     })
 
-    let challengeForm = <NewChallengeForm />
+    let challengeForm = null
     if (
-      this.state.challenges.length === 0 ||
-      this.state.challenges[0].current_user === null ||
-      this.userHasAChallenge()
+      this.state.challenges.length !== 0 &&
+      this.state.challenges[0].current_user !== null &&
+      !this.userHasAChallenge()
       ) {
-      challengeForm = null
+        challengeForm =
+        <NewChallengeForm
+          addNewChallenge={this.addNewChallenge}
+          currentUser={this.state.challenges[0].current_user}
+        />
     }
 
     return(
