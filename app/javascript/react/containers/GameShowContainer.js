@@ -62,7 +62,8 @@ class GameShowContainer extends React.Component {
     return(
       <div className='game-show-container'>
         <GameInfoTile
-
+          player_black={this.state.game.players.black}
+          player_white={this.state.game.players.white}
         />
         <BoardContainer
           size={this.state.game.size}
