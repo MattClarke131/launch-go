@@ -9,6 +9,7 @@ class ChallengesContainer extends React.Component {
       challenges: []
     }
     this.formatRank = this.formatRank.bind(this)
+    this.userHasAChallenge = this.userHasAChallenge.bind(this)
   }
 
   formatRank(rank) {
@@ -19,6 +20,17 @@ class ChallengesContainer extends React.Component {
     }
   }
 
+  userHasAChallenge() {
+    let challenge_exists = false
+    debugger;
+    this.state.challenges.forEach((challenge) => {
+      if(challenge.current_user == challenge.user.email) {
+        challenge_exists = true
+      }
+    })
+
+    return challenge_exists
+  }
 
   componentDidMount() {
     fetch('/api/v1/challenges.json')
