@@ -2,9 +2,15 @@ import React from 'react'
 import ChallengeButton from './ChallengeButton'
 
 const ChallengeTile = (props) => {
+  let currentUser, challengeUser
+  if(props.currentUser !== null) {
+    currentUser = props.currentUser.email
+    challengeUser = props.userEmail
+  }
   let challengeButton =
     <ChallengeButton
-
+      currentUser={currentUser}
+      challengeUser={challengeUser}
     />
 
   return(
