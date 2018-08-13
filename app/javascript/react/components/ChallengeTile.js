@@ -11,6 +11,7 @@ const ChallengeTile = (props) => {
     <ChallengeButton
       currentUser={currentUser}
       challengeUser={challengeUser}
+      handleChallengeClick={props.handleChallengeClick}
     />
 
   return(

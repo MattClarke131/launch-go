@@ -17,7 +17,13 @@ const ChallengeButton = (props) => {
 
   return(
     <div>
-      <button className={buttonClass}>{buttonText}</button>
+      <button
+        onClick={props.handleChallengeClick}
+        className={buttonClass}
+        value={props.challengeUser}
+      >
+        {buttonText}
+      </button>
     </div>
   )
 }

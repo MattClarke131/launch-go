@@ -11,6 +11,9 @@ class ChallengesContainer extends React.Component {
     this.formatRank = this.formatRank.bind(this)
     this.userHasAChallenge = this.userHasAChallenge.bind(this)
     this.addNewChallenge = this.addNewChallenge.bind(this)
+    this.handleChallengeClick = this.handleChallengeClick.bind(this)
+    this.deleteChallenge = this.deleteChallenge.bind(this)
+    this.acceptChallenge = this.acceptChallenge.bind(this)
   }
 
   formatRank(rank) {
@@ -37,6 +40,26 @@ class ChallengesContainer extends React.Component {
     challenges.unshift(newChallenge)
     this.setState(challenges)
   }
+
+  handleChallengeClick(event) {
+    event.preventDefault()
+    if(event.target.value === this.state.challenges[0].current_user) {
+      this.deleteChallenge(event.target.value)
+    } else if (this.state.challenges[0].current_user === undefined) {
+      // Do nothing
+    } else {
+      this.acceptChallenge(event.target.value)
+    }
+  }
+
+  deleteChallenge(user_email) {
+
+  }
+
+  acceptChallenge(user_email) {
+
+  }
+
 
   componentDidMount() {
     fetch('/api/v1/challenges.json')
@@ -70,6 +93,7 @@ class ChallengesContainer extends React.Component {
           minRank={this.formatRank(challenge.min_rank)}
           maxRank={this.formatRank(challenge.max_rank)}
           currentUser={currentUser}
+          handleChallengeClick={this.handleChallengeClick}
         />
       )
     })
