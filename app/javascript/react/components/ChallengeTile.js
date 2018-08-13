@@ -56,6 +56,7 @@ const ChallengeTile = (props) => {
 
   let sameUserTile =
     <div className='challenge-tile'>
+      <h1>Your Challenge</h1>
       <div className='loader'>
         <Loader
           type='Oval'
