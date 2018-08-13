@@ -2,8 +2,6 @@
 
 
 form.new-challenge-form {
-
-
   label {
   // position
     margin: 4% 15%;
@@ -111,5 +109,28 @@ div.challenges-container {
       margin-top: 5%;
       font-size: 100%;
     }
+  }
+
+  .loader {
+    margin-left: 10%;
+    margin-top: 2%;
+  }
+
+  h1 {
+    margin-left: 10%;
+  }
+
+  .visitor-button {
+    background-color: #E04040;
+  }
+  .delete-button {
+    background-color: #E04040;
+    margin-left: 100%;
+    margin-right: 0%;
+    margin-top: 5%;
+  }
+  .accept-button {
+    background-color: #50C050;
+    float: right;
   }
 }

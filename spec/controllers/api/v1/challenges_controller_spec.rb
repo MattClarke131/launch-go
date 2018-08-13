@@ -26,16 +26,16 @@ RSpec.describe Api::V1::ChallengesController, type: :controller do
 
       expect(
         returned_json['challenges'][0]['max_rank']
-      ).to eq challenge_1.max_rank
+      ).to eq challenge_2.max_rank
       expect(
         returned_json['challenges'][0]['min_rank']
-      ).to eq challenge_1.min_rank
+      ).to eq challenge_2.min_rank
       expect(
         returned_json['challenges'][0]['user']['email']
-      ).to eq user_1.email
+      ).to eq user_2.email
       expect(
         returned_json['challenges'][0]['user']['rank']
-      ).to eq user_1.rank
+      ).to eq user_2.rank
     end
   end
 end

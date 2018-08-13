@@ -11,6 +11,9 @@ class ChallengesContainer extends React.Component {
     this.formatRank = this.formatRank.bind(this)
     this.userHasAChallenge = this.userHasAChallenge.bind(this)
     this.addNewChallenge = this.addNewChallenge.bind(this)
+    this.handleChallengeClick = this.handleChallengeClick.bind(this)
+    this.deleteChallenge = this.deleteChallenge.bind(this)
+    this.acceptChallenge = this.acceptChallenge.bind(this)
   }
 
   formatRank(rank) {
@@ -38,6 +41,50 @@ class ChallengesContainer extends React.Component {
     this.setState(challenges)
   }
 
+  handleChallengeClick(event) {
+    event.preventDefault()
+    if(event.target.value === this.state.challenges[0].current_user.email) {
+      this.deleteChallenge(event.target.value)
+    } else if (this.state.challenges[0].current_user === undefined) {
+      // Do nothing
+    } else {
+      this.acceptChallenge(event.target.value)
+    }
+  }
+
+  deleteChallenge(user_email) {
+    fetch(`/api/v1/challenges/d`, {
+      credentials: 'same-origin',
+      method: 'DELETE',
+      body: JSON.stringify({user_email: user_email}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if(response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`
+        let error = new Error(errorMessage)
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+      if (response.deleted) {
+        let newState = this.state
+        newState.challenges.shift()
+        this.setState(newState)
+      }
+    })
+  }
+
+  acceptChallenge(user_email) {
+
+  }
+
+
   componentDidMount() {
     fetch('/api/v1/challenges.json')
     .then(response => {
@@ -56,6 +103,11 @@ class ChallengesContainer extends React.Component {
   }
 
   render() {
+    let currentUser = null
+    if(this.state.challenges.length > 0) {
+      currentUser = this.state.challenges[0].current_user
+    }
+
     let challenges = this.state.challenges.map(challenge => {
       return (
         <ChallengeTile
@@ -64,6 +116,8 @@ class ChallengesContainer extends React.Component {
           userRank={this.formatRank(challenge.user.rank)}
           minRank={this.formatRank(challenge.min_rank)}
           maxRank={this.formatRank(challenge.max_rank)}
+          currentUser={currentUser}
+          handleChallengeClick={this.handleChallengeClick}
         />
       )
     })
