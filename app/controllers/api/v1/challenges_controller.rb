@@ -1,7 +1,12 @@
 class Api::V1::ChallengesController < ApplicationController
   protect_from_forgery with: :null_session
   def index
-    @challenges = sort_challenges(Challenge.all)
+    @challenges
+    if user_signed_in?
+      @challenges = sort_challenges(Challenge.all)
+    else
+      @challenges = Challenge.all.order(id: :desc)
+    end
     render json: @challenges, each_serializer: ChallengeSerializer
   end
 
