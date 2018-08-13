@@ -38,11 +38,28 @@ class Api::V1::ChallengesController < ApplicationController
 
   end
 
+  def destroy
+    challenge = User.find_by(email: user_email_params).challenge
+
+    if challenge.destroy
+      render json: { deleted: true }
+    else
+      render json: { deleted: false }
+
+    end
+  end
+
+  private
+
   def challenge_params
     params.require(:challenge).permit(:minRank, :maxRank, :userEmail)
   end
 
   def sort_challenges(challenges)
     challenges.sort {|x,y| y.user.id <=> current_user.id}
+  end
+
+  def user_email_params
+    params.require(:user_email)
   end
 end

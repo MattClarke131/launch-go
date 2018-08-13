@@ -43,7 +43,7 @@ class ChallengesContainer extends React.Component {
 
   handleChallengeClick(event) {
     event.preventDefault()
-    if(event.target.value === this.state.challenges[0].current_user) {
+    if(event.target.value === this.state.challenges[0].current_user.email) {
       this.deleteChallenge(event.target.value)
     } else if (this.state.challenges[0].current_user === undefined) {
       // Do nothing
@@ -53,7 +53,31 @@ class ChallengesContainer extends React.Component {
   }
 
   deleteChallenge(user_email) {
-
+    fetch(`/api/v1/challenges/d`, {
+      credentials: 'same-origin',
+      method: 'DELETE',
+      body: JSON.stringify({user_email: user_email}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if(response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`
+        let error = new Error(errorMessage)
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+      if (response.deleted) {
+        let newState = this.state
+        newState.challenges.shift()
+        this.setState(newState)
+      }
+    })
   }
 
   acceptChallenge(user_email) {
