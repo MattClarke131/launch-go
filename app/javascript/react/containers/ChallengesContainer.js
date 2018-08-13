@@ -53,7 +53,8 @@ class ChallengesContainer extends React.Component {
   }
 
   deleteChallenge(user_email) {
-    fetch(`/api/v1/challenges/d`, {
+    // the value of params does not matter, but there must be a value. I chose 1
+    fetch(`/api/v1/challenges/1`, {
       credentials: 'same-origin',
       method: 'DELETE',
       body: JSON.stringify({user_email: user_email}),
@@ -78,12 +79,32 @@ class ChallengesContainer extends React.Component {
         this.setState(newState)
       }
     })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
   acceptChallenge(user_email) {
-
+    fetch(`/api/v1/games`, {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify({user_email: user_email}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if(response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.status} (${response.status})`
+        let error = new Error(errorMessage)
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
-
 
   componentDidMount() {
     fetch('/api/v1/challenges.json')
