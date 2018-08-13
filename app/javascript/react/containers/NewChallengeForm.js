@@ -50,7 +50,21 @@ class NewChallengeForm extends React.Component {
     })
     .then(response => response.json())
     .then(response => {
-
+      if(response.errors.length === 0) {
+        let newChallenge = {
+          max_rank: response.challenge.max_rank,
+          min_rank: response.challenge.min_rank,
+          user: {
+            email: response.challenge.user.email,
+            rank: response.challenge.user.rank
+          },
+          current_user: {
+            email: this.props.currentUser.email,
+            rank: this.props.currentUser.rank
+          }
+        }
+        this.props.addNewChallenge(newChallenge)
+      }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }

@@ -13,6 +13,14 @@ class Api::V1::ChallengesController < ApplicationController
       max_rank: challenge_params[:maxRank]
     )
     if challenge.save
+      challenge = {
+        min_rank: challenge.min_rank,
+        max_rank: challenge.max_rank,
+        user: {
+          email: challenge.user.email,
+          rank: challenge.user.rank
+        }
+      }
       render json: {
         challenge: challenge, errors: []
       }

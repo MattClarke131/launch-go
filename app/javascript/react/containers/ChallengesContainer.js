@@ -34,7 +34,7 @@ class ChallengesContainer extends React.Component {
 
   addNewChallenge(newChallenge) {
     let challenges = this.state.challenges
-    challenges.push(newChallenge)
+    challenges.unshift(newChallenge)
     this.setState(challenges)
   }
 
