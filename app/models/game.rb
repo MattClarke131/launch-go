@@ -4,6 +4,18 @@ class Game < ApplicationRecord
   has_many :pairings
   has_many :users, through: :pairings
 
+  after_create :create_empty_board_state
+
+  private
+
+  def create_empty_board_state
+    BoardState.create!(
+      game: self,
+      move_number: 0,
+      board: BoardState.empty_board
+    )
+  end
+
   def self.create_game_default(player1, player2)
     players = [player1, player2].shuffle
     new_game = Game.new(size: 9)
@@ -18,7 +30,6 @@ class Game < ApplicationRecord
         game: new_game,
         color: 'white',
       )
-
       return new_game
     end
   end
