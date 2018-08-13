@@ -1,6 +1,12 @@
 import React from 'react'
+import ChallengeButton from './ChallengeButton'
 
 const ChallengeTile = (props) => {
+  let challengeButton =
+    <ChallengeButton
+
+    />
+
   return(
     <div className='challenge-tile'>
       <div className='playerEmail field'>
@@ -35,6 +41,9 @@ const ChallengeTile = (props) => {
           {props.maxRank}
         </div>
       </div>
+
+      {challengeButton}
+
     </div>
   )
 }
