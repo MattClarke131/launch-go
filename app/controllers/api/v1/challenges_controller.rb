@@ -1,7 +1,7 @@
 class Api::V1::ChallengesController < ApplicationController
   protect_from_forgery with: :null_session
   def index
-    @challenges = Challenge.all
+    @challenges = sort_challenges(Challenge.all)
     render json: @challenges, each_serializer: ChallengeSerializer
   end
 
@@ -35,5 +35,9 @@ class Api::V1::ChallengesController < ApplicationController
 
   def challenge_params
     params.require(:challenge).permit(:minRank, :maxRank, :userEmail)
+  end
+
+  def sort_challenges(challenges)
+    challenges.sort {|x,y| y.user.id <=> current_user.id}
   end
 end
