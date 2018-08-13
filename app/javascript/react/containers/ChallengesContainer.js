@@ -1,6 +1,6 @@
 import React from 'react'
 import ChallengeTile from '../components/ChallengeTile'
-import NewChallengeForm from '../components/NewChallengeForm'
+import NewChallengeForm from './NewChallengeForm'
 
 class ChallengesContainer extends React.Component {
   constructor(props) {
@@ -9,6 +9,8 @@ class ChallengesContainer extends React.Component {
       challenges: []
     }
     this.formatRank = this.formatRank.bind(this)
+    this.userHasAChallenge = this.userHasAChallenge.bind(this)
+    this.addNewChallenge = this.addNewChallenge.bind(this)
   }
 
   formatRank(rank) {
@@ -19,6 +21,22 @@ class ChallengesContainer extends React.Component {
     }
   }
 
+  userHasAChallenge() {
+    let challenge_exists = false
+    this.state.challenges.forEach((challenge) => {
+      if(challenge.current_user.email == challenge.user.email) {
+        challenge_exists = true
+      }
+    })
+
+    return challenge_exists
+  }
+
+  addNewChallenge(newChallenge) {
+    let challenges = this.state.challenges
+    challenges.unshift(newChallenge)
+    this.setState(challenges)
+  }
 
   componentDidMount() {
     fetch('/api/v1/challenges.json')
@@ -50,9 +68,22 @@ class ChallengesContainer extends React.Component {
       )
     })
 
+    let challengeForm = null
+    if (
+      this.state.challenges.length !== 0 &&
+      this.state.challenges[0].current_user !== null &&
+      !this.userHasAChallenge()
+      ) {
+        challengeForm =
+        <NewChallengeForm
+          addNewChallenge={this.addNewChallenge}
+          currentUser={this.state.challenges[0].current_user}
+        />
+    }
+
     return(
       <div className='challenges-container'>
-        <NewChallengeForm />
+        {challengeForm}
         <h1>Open Challenges</h1>
         <div className='challenges-box'>
           {challenges}
