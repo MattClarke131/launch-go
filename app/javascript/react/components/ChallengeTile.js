@@ -2,10 +2,10 @@ import React from 'react'
 import ChallengeButton from './ChallengeButton'
 
 const ChallengeTile = (props) => {
-  let currentUser, challengeUser
+  let challengeUser = props.userEmail
+  let currentUser
   if(props.currentUser !== null) {
     currentUser = props.currentUser.email
-    challengeUser = props.userEmail
   }
   let challengeButton =
     <ChallengeButton
