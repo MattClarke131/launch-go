@@ -56,6 +56,11 @@ class ChallengesContainer extends React.Component {
   }
 
   render() {
+    let currentUser = null
+    if(this.state.challenges.length > 0) {
+      currentUser = this.state.challenges[0].current_user
+    }
+
     let challenges = this.state.challenges.map(challenge => {
       return (
         <ChallengeTile
@@ -64,6 +69,7 @@ class ChallengesContainer extends React.Component {
           userRank={this.formatRank(challenge.user.rank)}
           minRank={this.formatRank(challenge.min_rank)}
           maxRank={this.formatRank(challenge.max_rank)}
+          currentUser={currentUser}
         />
       )
     })
