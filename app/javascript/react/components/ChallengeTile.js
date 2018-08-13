@@ -1,5 +1,6 @@
 import React from 'react'
 import ChallengeButton from './ChallengeButton'
+import Loader from 'react-loader-spinner'
 
 const ChallengeTile = (props) => {
   let challengeUser = props.userEmail
@@ -14,7 +15,9 @@ const ChallengeTile = (props) => {
       handleChallengeClick={props.handleChallengeClick}
     />
 
-  return(
+  let challengeTile
+
+  let otherUserTile =
     <div className='challenge-tile'>
       <div className='playerEmail field'>
         <div className='challenge-tile-title'>
@@ -48,11 +51,29 @@ const ChallengeTile = (props) => {
           {props.maxRank}
         </div>
       </div>
-
       {challengeButton}
-
     </div>
-  )
+
+  let sameUserTile =
+    <div className='challenge-tile'>
+      <div className='loader'>
+        <Loader
+          type='Oval'
+          color='#000000'
+          height='50'
+          width='50'
+        />
+      </div>
+      {challengeButton}
+    </div>
+
+  if (currentUser === challengeUser) {
+    challengeTile = sameUserTile
+  } else {
+    challengeTile = otherUserTile
+  }
+
+  return(challengeTile)
 }
 
 export default ChallengeTile

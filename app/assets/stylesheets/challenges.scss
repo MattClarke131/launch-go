@@ -111,13 +111,22 @@ div.challenges-container {
     }
   }
 
+  .loader {
+    margin-left: 10%;
+    margin-top: 5%;
+  }
+
   .visitor-button {
     background-color: #E04040;
   }
   .delete-button {
     background-color: #E04040;
+    margin-left: 100%;
+    margin-right: 0%;
+    margin-top: 5%;
   }
   .accept-button {
-    background-color: #50C050
+    background-color: #50C050;
+    float: right;
   }
 }
