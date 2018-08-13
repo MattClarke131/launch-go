@@ -1,6 +1,7 @@
 import React from 'react'
 import ChallengeTile from '../components/ChallengeTile'
 import NewChallengeForm from './NewChallengeForm'
+import { browserHistory } from 'react-router'
 
 class ChallengesContainer extends React.Component {
   constructor(props) {
@@ -102,6 +103,7 @@ class ChallengesContainer extends React.Component {
     })
     .then(response => response.json())
     .then(response => {
+      browserHistory.push(`/games/${response.game.id}`)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
