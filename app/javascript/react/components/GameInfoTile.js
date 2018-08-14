@@ -6,6 +6,8 @@ const GameInfoTile = (props) => {
         BLACK: {props.player_black.email}
         <br/>
         WHITE: {props.player_white.email}
+        <br />
+        TURN: {props.player_turn}
     </div>
   )
 }
