@@ -1,7 +1,7 @@
 Launch Go
 ================================================================================
 Breakable toy project for Launch Academy Cohort 21
-[![Build Status]](https://codeship.com/projects/<5098d860-7af2-0136-d2cc-1e8efa2619d8>/status?branch=master)
+[![Build Status](https://codeship.com/projects/<5098d860-7af2-0136-d2cc-1e8efa2619d8>/status?branch=master)]
 
 What is go?
 
