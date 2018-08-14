@@ -59,11 +59,16 @@ class GameShowContainer extends React.Component {
     } else {
       boardState = this.generateEmptyBoardState();
     }
+
+    let player_turn =
+      this.state.game.board_states.length % 2 === 0 ? 'white' : 'black'
+
     return(
       <div className='game-show-container'>
         <GameInfoTile
           player_black={this.state.game.players.black}
           player_white={this.state.game.players.white}
+          player_turn={player_turn}
         />
         <BoardContainer
           size={this.state.game.size}
