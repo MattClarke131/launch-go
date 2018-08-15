@@ -3,7 +3,7 @@ class Api::V1::ChallengesController < ApplicationController
   def show
     game_id = nil
     unless User.current_user.games.empty?
-      game_id = User.current_user.games.last
+      game_id = User.current_user.games.last.id
     end
     render json: {gameId: game_id}
   end
