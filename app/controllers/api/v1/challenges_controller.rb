@@ -5,7 +5,7 @@ class Api::V1::ChallengesController < ApplicationController
     unless User.current_user.games.empty?
       game_id = User.current_user.games.last
     end
-    render json: {gameId: gameId}
+    render json: {gameId: game_id}
   end
 
   def index
