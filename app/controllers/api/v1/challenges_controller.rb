@@ -1,5 +1,13 @@
 class Api::V1::ChallengesController < ApplicationController
   protect_from_forgery with: :null_session
+  def show
+    game_id = nil
+    unless User.current_user.games.empty?
+      game_id = User.current_user.games.last
+    end
+    render json: {gameId: gameId}
+  end
+
   def index
     @challenges
     if user_signed_in?
