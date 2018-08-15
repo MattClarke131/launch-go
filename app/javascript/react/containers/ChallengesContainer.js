@@ -15,6 +15,7 @@ class ChallengesContainer extends React.Component {
     this.handleChallengeClick = this.handleChallengeClick.bind(this)
     this.deleteChallenge = this.deleteChallenge.bind(this)
     this.acceptChallenge = this.acceptChallenge.bind(this)
+    this.challengeListener = this.challengeListener.bind(this)
   }
 
   formatRank(rank) {
@@ -40,6 +41,7 @@ class ChallengesContainer extends React.Component {
     let challenges = this.state.challenges
     challenges.unshift(newChallenge)
     this.setState(challenges)
+    this.challengeListener(newChallenge.id)
   }
 
   handleChallengeClick(event) {
@@ -108,6 +110,13 @@ class ChallengesContainer extends React.Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
+  challengeListener(challengeId) {
+    let delay = 1000;
+    this.checkStatus(challengeId)
+    window.setTimeout(() => {
+      this.challengeListener(challengeId)
+    }, delay)
+  }
   componentDidMount() {
     fetch('/api/v1/challenges.json')
     .then(response => {
