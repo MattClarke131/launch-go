@@ -15,10 +15,11 @@ class GameShowContainer extends React.Component {
         players: {
           black: '',
           white: ''
-        }
+        },
       }
     }
     this.generateEmptyBoardState = this.generateEmptyBoardState.bind(this)
+    this.makeMove = this.makeMove.bind(this)
   }
 
   generateEmptyBoardState() {
@@ -45,6 +46,23 @@ class GameShowContainer extends React.Component {
             error = new Error(errorMessage);
         throw(error);
       }
+    })
+    .then(response => response.json())
+    .then(response => {
+      this.setState(response)
+    })
+  }
+
+  makeMove(x,y) {
+    let formPayload = {
+      x: x,
+      y: y
+    }
+    fetch(`/api/v1/games/${this.state.game.id}`, {
+      credentials: 'same-origin',
+      method: 'PATCH',
+      body: JSON.stringify(formPayload),
+      headers: { 'Content-Type': 'application/json' }
     })
     .then(response => response.json())
     .then(response => {
