@@ -52,6 +52,7 @@ class NewChallengeForm extends React.Component {
     .then(response => {
       if(response.errors.length === 0) {
         let newChallenge = {
+          id: response.challenge.id,
           max_rank: response.challenge.max_rank,
           min_rank: response.challenge.min_rank,
           user: {

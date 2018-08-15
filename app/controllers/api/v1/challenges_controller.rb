@@ -19,6 +19,7 @@ class Api::V1::ChallengesController < ApplicationController
     )
     if challenge.save
       challenge = {
+        id: challenge.id,
         min_rank: challenge.min_rank,
         max_rank: challenge.max_rank,
         user: {
