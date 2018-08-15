@@ -132,7 +132,9 @@ class ChallengesContainer extends React.Component {
     })
     .then(response => response.json())
     .then(response => {
-      debugger;
+      if(response.gameId !== null) {
+        browserHistory.push(`/games/${response.gameId}`)
+      }
     })
   }
 
