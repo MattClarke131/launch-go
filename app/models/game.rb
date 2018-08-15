@@ -33,4 +33,15 @@ class Game < ApplicationRecord
       return new_game
     end
   end
+
+  def self.legal_moves(board_state)
+    legal_board = JSON.parse(BoardState.empty_board)
+    board_state.each_index do |x|
+      board_state[x].each_index do |y|
+        legal_board[x][y] = board_state[x][y] == legal_board[x][y]
+      end
+    end
+
+    legal_board
+  end
 end
