@@ -16,6 +16,7 @@ class ChallengesContainer extends React.Component {
     this.deleteChallenge = this.deleteChallenge.bind(this)
     this.acceptChallenge = this.acceptChallenge.bind(this)
     this.challengeListener = this.challengeListener.bind(this)
+    this.checkStatus = this.checkStatus.bind(this)
   }
 
   formatRank(rank) {
@@ -117,6 +118,24 @@ class ChallengesContainer extends React.Component {
       this.challengeListener(challengeId)
     }, delay)
   }
+
+  checkStatus(challengeId) {
+    fetch(`/api/v1/challenges/${challengeId}`)
+    .then(response => {
+      if(response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`;
+        let error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+      debugger;
+    })
+  }
+
   componentDidMount() {
     fetch('/api/v1/challenges.json')
     .then(response => {
