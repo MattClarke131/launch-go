@@ -24,8 +24,14 @@ const BoardTile = (props) => {
 
   let stoneColor = 'stone-' + props.color
 
+
+  let makeMove = () => {
+    props.makeMove(props.x, props.y)
+  }
+
+
   return(
-    <div className={classes}>
+    <div className={classes} onClick={makeMove}>
       <div className='board-tile-up-left' />
       <div className='board-tile-up-right' />
       <div className='board-tile-down-left' />

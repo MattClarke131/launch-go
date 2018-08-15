@@ -53,10 +53,11 @@ class GameShowContainer extends React.Component {
     })
   }
 
-  makeMove(x,y) {
+  makeMove(x_coord,y_coord) {
+    debugger;
     let formPayload = {
-      x: x,
-      y: y
+      x: x_coord-1,
+      y: this.state.game.board_states[0][0].length-y_coord
     }
     fetch(`/api/v1/games/${this.state.game.id}`, {
       credentials: 'same-origin',
@@ -91,6 +92,8 @@ class GameShowContainer extends React.Component {
         <BoardContainer
           size={this.state.game.size}
           boardState={boardState}
+          legalMoves={this.state.game.legal_moves}
+          makeMove={this.makeMove}
         />
       </div>
     )
