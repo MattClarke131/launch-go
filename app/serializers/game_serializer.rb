@@ -30,6 +30,6 @@ class GameSerializer < ActiveModel::Serializer
     board_states = object.board_states.order('move_number DESC')
     newest_state = board_states[0]
 
-    JSON.generate(Game.legal_moves(JSON.parse(newest_state.board)))
+    Game.legal_moves(JSON.parse(newest_state.board))
   end
 end
