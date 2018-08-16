@@ -9,12 +9,9 @@ export const App = (props) => {
     <div>
       <Router history={browserHistory}>
         <Route path='/' >
-          <Route path='/challenges'>
-            <IndexRoute component={ChallengesContainer} />
-          </Route>
-          <Route path='/games'>
-            <Route path= "/games/:id" component={GameShowContainer} />
-          </Route>
+          <IndexRoute component={ChallengesContainer} />
+          <Route path='/challenges' component={ChallengesContainer} />
+          <Route path= "/games/:id" component={GameShowContainer} />
         </Route>
       </Router>
     </div>
