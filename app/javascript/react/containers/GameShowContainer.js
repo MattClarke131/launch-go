@@ -1,6 +1,7 @@
 import React from 'react'
 import BoardContainer from './BoardContainer'
 import GameInfoTile from '../components/GameInfoTile'
+import GameActionTile from '../components/GameActionTile'
 
 class GameShowContainer extends React.Component {
   constructor(props) {
@@ -114,6 +115,9 @@ class GameShowContainer extends React.Component {
           boardState={boardState}
           legalMoves={this.state.game.legal_moves}
           makeMove={this.makeMove}
+        />
+        <GameActionTile
+
         />
       </div>
     )
