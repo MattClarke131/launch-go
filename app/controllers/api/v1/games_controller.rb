@@ -22,6 +22,21 @@ class Api::V1::GamesController < ApplicationController
     render json: new_game
   end
 
+  def update
+    game = Game.find(params[:id])
+    board_states = game.board_states.order('move_number DESC')
+    newest_state = board_states[0]
+
+    if(
+      authorize_move(game, params[:x], params[:y]) &&
+      authorize_player(game)
+    )
+      update_game(game, params[:x], params[:y])
+    end
+
+    render json: game
+  end
+
   private
 
   def game_params
@@ -30,5 +45,40 @@ class Api::V1::GamesController < ApplicationController
 
   def user_params
     params[:user_email]
+  end
+
+  def authorize_move(game, x, y)
+    board_states = game.board_states.order('move_number DESC')
+    newest_state = board_states[0]
+    board = JSON.parse(newest_state.board)
+
+    Game.move_is_legal?(board, x, y)
+  end
+
+  def authorize_player(game)
+    num_board_states = game.board_states.length
+    active_color = num_board_states % 2 == 0 ? 'white' : 'black'
+    active_pairing =
+      game.pairings.select { |pair| pair.color == active_color}[0]
+    active_player_id = active_pairing.user_id
+
+    active_player_id === User.current_user.id
+  end
+
+  def update_game(game, x, y)
+    board_states = game.board_states.order('move_number DESC')
+    newest_state = board_states[0]
+    new_board = JSON.parse(newest_state.board)
+    move_color = newest_state.move_number % 2 === 0 ? 'black' : 'white'
+    new_board[x][y] = move_color
+    new_board = JSON.generate(new_board)
+
+    new_state = BoardState.new(
+      game: game,
+      move_number: newest_state.move_number + 1,
+      board: new_board
+    )
+
+    new_state.save!
   end
 end
