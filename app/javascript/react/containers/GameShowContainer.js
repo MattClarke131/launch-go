@@ -49,10 +49,13 @@ class GameShowContainer extends React.Component {
     return boardState
   }
 
-  makeMove(x_coord,y_coord) {
+  makeMove(moveObject) {
     let formPayload = {
-      x: x_coord-1,
-      y: this.state.game.board_states[0][0].length-y_coord
+      type: moveObject.type
+    }
+    if (moveObject.type === 'move') {
+      formPayload['x'] = moveObject.x-1
+      formPayload['y'] = this.state.game.board_states[0][0].length-moveObject.y
     }
     fetch(`/api/v1/games/${this.state.game.id}`, {
       credentials: 'same-origin',
