@@ -1,5 +1,5 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :legal_moves
 
   has_many :moves
   has_many :board_states
@@ -24,5 +24,12 @@ class GameSerializer < ActiveModel::Serializer
     end
 
     players
+  end
+
+  def legal_moves
+    board_states = object.board_states.order('move_number DESC')
+    newest_state = board_states[0]
+
+    Game.legal_moves(JSON.parse(newest_state.board))
   end
 end

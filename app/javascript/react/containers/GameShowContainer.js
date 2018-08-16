@@ -15,10 +15,11 @@ class GameShowContainer extends React.Component {
         players: {
           black: '',
           white: ''
-        }
+        },
       }
     }
     this.generateEmptyBoardState = this.generateEmptyBoardState.bind(this)
+    this.makeMove = this.makeMove.bind(this)
   }
 
   generateEmptyBoardState() {
@@ -52,6 +53,24 @@ class GameShowContainer extends React.Component {
     })
   }
 
+  makeMove(x_coord,y_coord) {
+    debugger;
+    let formPayload = {
+      x: x_coord-1,
+      y: this.state.game.board_states[0][0].length-y_coord
+    }
+    fetch(`/api/v1/games/${this.state.game.id}`, {
+      credentials: 'same-origin',
+      method: 'PATCH',
+      body: JSON.stringify(formPayload),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(response => {
+      this.setState(response)
+    })
+  }
+
   render() {
     let boardState
     if (this.state.game.board_states.length !== 0) {
@@ -73,6 +92,8 @@ class GameShowContainer extends React.Component {
         <BoardContainer
           size={this.state.game.size}
           boardState={boardState}
+          legalMoves={this.state.game.legal_moves}
+          makeMove={this.makeMove}
         />
       </div>
     )

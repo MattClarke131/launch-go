@@ -25,6 +25,7 @@ class BoardContainer extends React.Component {
             bottom={bottom}
             left={left}
             right={right}
+            makeMove={this.props.makeMove}
           />
         )
       })
