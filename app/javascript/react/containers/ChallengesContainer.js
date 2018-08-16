@@ -7,7 +7,8 @@ class ChallengesContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      challenges: []
+      challenges: [],
+      challenge_accepted: false
     }
     this.formatRank = this.formatRank.bind(this)
     this.userHasAChallenge = this.userHasAChallenge.bind(this)
@@ -15,6 +16,8 @@ class ChallengesContainer extends React.Component {
     this.handleChallengeClick = this.handleChallengeClick.bind(this)
     this.deleteChallenge = this.deleteChallenge.bind(this)
     this.acceptChallenge = this.acceptChallenge.bind(this)
+    this.challengeListener = this.challengeListener.bind(this)
+    this.checkStatus = this.checkStatus.bind(this)
   }
 
   formatRank(rank) {
@@ -39,7 +42,8 @@ class ChallengesContainer extends React.Component {
   addNewChallenge(newChallenge) {
     let challenges = this.state.challenges
     challenges.unshift(newChallenge)
-    this.setState(challenges)
+    this.setState({challenges: challenges})
+    this.challengeListener(newChallenge.id)
   }
 
   handleChallengeClick(event) {
@@ -108,6 +112,36 @@ class ChallengesContainer extends React.Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
+  challengeListener(challengeId) {
+    let delay = 500;
+    if(!this.state.challenge_accepted) {
+      this.checkStatus(challengeId)
+      window.setTimeout(() => {
+        this.challengeListener(challengeId)
+      }, delay)
+    }
+  }
+
+  checkStatus(challengeId) {
+    fetch(`/api/v1/challenges/${challengeId}`)
+    .then(response => {
+      if(response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`;
+        let error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(response => {
+      if(response.gameId !== null) {
+        this.setState({challenge_accepted: true})
+        browserHistory.push(`/games/${response.gameId}`)
+      }
+    })
+  }
+
   componentDidMount() {
     fetch('/api/v1/challenges.json')
     .then(response => {
@@ -121,7 +155,7 @@ class ChallengesContainer extends React.Component {
     })
     .then(response => response.json())
     .then(response => {
-      this.setState(response)
+      this.setState({challenges: response.challenges})
     })
   }
 

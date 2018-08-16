@@ -1,5 +1,13 @@
 class Api::V1::ChallengesController < ApplicationController
   protect_from_forgery with: :null_session
+  def show
+    game_id = nil
+    unless User.current_user.games.empty?
+      game_id = User.current_user.games.last.id
+    end
+    render json: {gameId: game_id}
+  end
+
   def index
     @challenges
     if user_signed_in?
@@ -19,6 +27,7 @@ class Api::V1::ChallengesController < ApplicationController
     )
     if challenge.save
       challenge = {
+        id: challenge.id,
         min_rank: challenge.min_rank,
         max_rank: challenge.max_rank,
         user: {

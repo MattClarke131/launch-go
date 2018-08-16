@@ -56,13 +56,17 @@ describe('ChallengesContainer', () => {
 
     it('has an initial state', () => {
       expect(wrapper.state()).toEqual({
-        challenges: []
+        challenges: [],
+        challenge_accepted: false
       })
     })
 
     it('updates state after a fetch request', (done) => {
       setTimeout(() => {
-        expect(wrapper.state()).toEqual(challenges)
+        expect(wrapper.state()).toEqual({
+          challenges: challenges.challenges,
+          challenge_accepted: false
+        })
         done()
       })
     }, 0)
