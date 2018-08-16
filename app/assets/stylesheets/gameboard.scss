@@ -1,6 +1,10 @@
 // import from games
 @import 'games';
 
+.board-container {
+  height: 640px;
+}
+
 .game-board {
   margin: 0 auto;
   width: 640px;
