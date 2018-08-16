@@ -7,7 +7,8 @@ class ChallengesContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      challenges: []
+      challenges: [],
+      challenge_accepted: false
     }
     this.formatRank = this.formatRank.bind(this)
     this.userHasAChallenge = this.userHasAChallenge.bind(this)
@@ -112,11 +113,13 @@ class ChallengesContainer extends React.Component {
   }
 
   challengeListener(challengeId) {
-    let delay = 1000;
-    this.checkStatus(challengeId)
-    window.setTimeout(() => {
-      this.challengeListener(challengeId)
-    }, delay)
+    let delay = 500;
+    if(!this.state.challenge_accepted) {
+      this.checkStatus(challengeId)
+      window.setTimeout(() => {
+        this.challengeListener(challengeId)
+      }, delay)
+    }
   }
 
   checkStatus(challengeId) {
@@ -133,6 +136,7 @@ class ChallengesContainer extends React.Component {
     .then(response => response.json())
     .then(response => {
       if(response.gameId !== null) {
+        this.state.challenge_accepted = true;
         browserHistory.push(`/games/${response.gameId}`)
       }
     })
