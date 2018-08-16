@@ -61,4 +61,14 @@ class Api::V1::GamesController < ApplicationController
     Game.move_is_legal?(board, x, y)
   end
 
+  def authorize_player(game)
+    num_board_states = game.board_states.length
+    active_color = num_board_states % 2 == 0 ? 'white' : 'black'
+    active_pairing =
+      game.pairings.select { |pair| pair.color == active_color}[0]
+    active_player_id = active_pairing.user_id
+
+    active_player_id === User.current_user.id
+  end
+
 end
