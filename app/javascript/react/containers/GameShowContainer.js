@@ -16,10 +16,23 @@ class GameShowContainer extends React.Component {
           black: '',
           white: ''
         },
-      }
+      },
+      gameCompleted: false
     }
     this.generateEmptyBoardState = this.generateEmptyBoardState.bind(this)
     this.makeMove = this.makeMove.bind(this)
+    this.updateBoard = this.updateBoard.bind(this)
+    this.listenForUpdate = this.listenForUpdate.bind(this)
+  }
+
+  listenForUpdate() {
+    let delay = 250
+    if(!this.state.gameCompleted) {
+      this.updateBoard()
+      window.setTimeout(() => {
+        this.listenForUpdate()
+      }, delay)
+    }
   }
 
   generateEmptyBoardState() {
@@ -36,25 +49,7 @@ class GameShowContainer extends React.Component {
     return boardState
   }
 
-  componentDidMount() {
-    fetch(`/api/v1/games/${this.state.game.id}`)
-    .then(response => {
-      if(response.ok) {
-        return response;
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-        throw(error);
-      }
-    })
-    .then(response => response.json())
-    .then(response => {
-      this.setState(response)
-    })
-  }
-
   makeMove(x_coord,y_coord) {
-    debugger;
     let formPayload = {
       x: x_coord-1,
       y: this.state.game.board_states[0][0].length-y_coord
@@ -64,6 +59,28 @@ class GameShowContainer extends React.Component {
       method: 'PATCH',
       body: JSON.stringify(formPayload),
       headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(response => {
+      this.setState(response)
+    })
+  }
+
+  componentDidMount() {
+    this.updateBoard()
+    this.listenForUpdate()
+  }
+
+  updateBoard() {
+    fetch(`/api/v1/games/${this.state.game.id}`)
+    .then(response => {
+      if(response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+        throw(error);
+      }
     })
     .then(response => response.json())
     .then(response => {
