@@ -27,19 +27,13 @@ class Api::V1::GamesController < ApplicationController
     board_states = game.board_states.order('move_number DESC')
     newest_state = board_states[0]
 
-    if(Game.legal_moves(JSON.parse(newest_state.board))[params[:x]][params[:y]])
-      new_board = JSON.parse(newest_state.board)
-      move_color = (newest_state.move_number + 1) % 2 == 1 ? 'black' : 'white'
-      new_board[params[:x]][params[:y]] = move_color
-      new_board = JSON.generate(new_board)
-
-      new_state = BoardState.new(
-        game: game,
-        move_number: newest_state.move_number + 1,
-        board: new_board
-      )
-      new_state.save!
+    if(
+      authorize_move(game, params[:x], params[:y]) &&
+      authorize_player(game)
+    )
+      update_game(game, params[:x], params[:y])
     end
+
     render json: game
   end
 
