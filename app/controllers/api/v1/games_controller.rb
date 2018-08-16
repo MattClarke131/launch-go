@@ -71,4 +71,20 @@ class Api::V1::GamesController < ApplicationController
     active_player_id === User.current_user.id
   end
 
+  def update_game(game, x, y)
+    board_states = game.board_states.order('move_number DESC')
+    newest_state = board_states[0]
+    new_board = JSON.parse(newest_state.board)
+    move_color = newest_state.move_number % 2 === 0 ? 'black' : 'white'
+    new_board[x][y] = move_color
+    new_board = JSON.generate(new_board)
+
+    new_state = BoardState.new(
+      game: game,
+      move_number: newest_state.move_number + 1,
+      board: new_board
+    )
+
+    new_state.save!
+  end
 end
