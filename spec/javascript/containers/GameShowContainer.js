@@ -52,7 +52,8 @@ describe('GameShowContainer', () => {
             black: '',
             white: ''
           }
-        }
+        },
+        gameCompleted: false
       })
     })
 
