@@ -42,7 +42,7 @@ class ChallengesContainer extends React.Component {
   addNewChallenge(newChallenge) {
     let challenges = this.state.challenges
     challenges.unshift(newChallenge)
-    this.setState(challenges)
+    this.setState({challenges: challenges})
     this.challengeListener(newChallenge.id)
   }
 
@@ -136,7 +136,7 @@ class ChallengesContainer extends React.Component {
     .then(response => response.json())
     .then(response => {
       if(response.gameId !== null) {
-        this.state.challenge_accepted = true;
+        this.setState({challenge_accepted: true})
         browserHistory.push(`/games/${response.gameId}`)
       }
     })
@@ -155,7 +155,7 @@ class ChallengesContainer extends React.Component {
     })
     .then(response => response.json())
     .then(response => {
-      this.setState(response)
+      this.setState({challenges: response.challenges})
     })
   }
 
