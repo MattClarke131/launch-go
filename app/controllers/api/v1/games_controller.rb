@@ -52,4 +52,13 @@ class Api::V1::GamesController < ApplicationController
   def user_params
     params[:user_email]
   end
+
+  def authorize_move(game, x, y)
+    board_states = game.board_states.order('move_number DESC')
+    newest_state = board_states[0]
+    board = JSON.parse(newest_state.board)
+
+    Game.move_is_legal?(board, x, y)
+  end
+
 end
