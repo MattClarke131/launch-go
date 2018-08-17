@@ -1,0 +1,25 @@
+// import constants from master
+@import 'master';
+
+.sign-in-form {
+  // position
+  margin: 0 auto;
+  margin-top: 5%;
+
+  // shape
+  padding: 2%;
+  height: 35%;
+  width: 50%;
+  border-radius: 10px;
+
+  // color
+  background-color: $secondary-background;
+
+  // children
+  .field {
+    background-color: $secondary-background;
+  }
+  .actions {
+    background-color: $secondary-background;
+  }
+}
