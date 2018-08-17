@@ -1,6 +1,5 @@
 import React from 'react'
 import ChallengeButton from './ChallengeButton'
-import Loader from 'react-loader-spinner'
 
 const ChallengeTile = (props) => {
   let challengeUser = props.userEmail
@@ -58,12 +57,9 @@ const ChallengeTile = (props) => {
     <div className='challenge-tile'>
       <h1>Your Challenge</h1>
       <div className='loader'>
-        <Loader
-          type='Oval'
-          color='#000000'
-          height='50'
-          width='50'
-        />
+        <div className="fa-3x">
+          <i className="fas fa-sync fa-spin"></i>
+        </div>
       </div>
       {challengeButton}
     </div>
