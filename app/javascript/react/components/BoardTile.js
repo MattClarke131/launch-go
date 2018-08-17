@@ -26,7 +26,11 @@ const BoardTile = (props) => {
 
 
   let makeMove = () => {
-    props.makeMove(props.x, props.y)
+    props.makeMove({
+      type: 'move',
+      x: props.x,
+      y: props.y
+    })
   }
 
 

@@ -12,7 +12,7 @@ $board-color: #F7E0B0;
   text-align: center;
   margin: 0 auto;
   margin-top: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   height: 6%;
   width: 50%;
 
@@ -21,4 +21,25 @@ $board-color: #F7E0B0;
 
   // shape
   border-radius: 10px;
+}
+
+.game-action-tile {
+  // position
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 3%;
+
+  // shape
+  height: 6%;
+  width: 50%;
+  border-radius: 10px;
+
+  // color
+  background-color: $secondary-background;
+
+  button {
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
 }

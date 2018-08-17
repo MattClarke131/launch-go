@@ -46,6 +46,6 @@ class Game < ApplicationRecord
   end
 
   def self.move_is_legal?(board_state, x, y)
-    self.legal_moves(board_state,)[x][y]
+    self.legal_moves(board_state)[x][y]
   end
 end
