@@ -1,6 +1,11 @@
 FactoryBot.define do
   factory :user do
-    sequence(:email) {|n| "user#{n}@example.com" }
+    usernames = [
+      'sente', 'kikashi', 'honte', 'sabaki', 'taisha', 'nadare', 'hane',
+      'keima', 'fuseki', 'joseki',
+      'sai', 'hikaru', 'kageyama', 'kitani', 'jie', 'changho', 'seigen',
+    ]
+    sequence(:email) {|n| "#{usernames.sample}#{n}@example.com" }
     password 'password'
     password_confirmation 'password'
     sequence(:rank) do
