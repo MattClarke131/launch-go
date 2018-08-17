@@ -17,8 +17,8 @@ class GameShowContainer extends React.Component {
           black: '',
           white: ''
         },
+        result: 'incomplete'
       },
-      gameCompleted: false
     }
     this.generateEmptyBoardState = this.generateEmptyBoardState.bind(this)
     this.makeMove = this.makeMove.bind(this)
@@ -109,6 +109,7 @@ class GameShowContainer extends React.Component {
           player_black={this.state.game.players.black}
           player_white={this.state.game.players.white}
           player_turn={player_turn}
+          gameResult={this.state.game.result}
         />
         <BoardContainer
           size={this.state.game.size}
