@@ -9,10 +9,16 @@ const GameActionTile = (props) => {
     })
   }
 
+  let resign = () => {
+    props.makeMove({
+      type: 'resign'
+    })
+  }
+
   return(
     <div className = 'game-action-tile'>
       <button onClick={pass}>Pass</button>
-      <button>Resign</button>
+      <button onClick={resign}>Resign</button>
     </div>
   )
 }
