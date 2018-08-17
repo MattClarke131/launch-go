@@ -94,4 +94,16 @@ class Api::V1::GamesController < ApplicationController
 
     new_state.save!
   end
+
+  def resign_game(game)
+    binding.pry
+    active_player = User.current_user
+    winner = game.pairings.select { |p| p.user_id != active_player.id }[0]
+    winner = winner.user
+    game.winner_id = winner.id
+    game.completed = true
+    game.result = "#{winner.email} wins by resignation"
+    game.save!
+
+  end
 end
