@@ -17,7 +17,8 @@ describe('GameShowContainer', () => {
       board_states: [JSON.stringify(SampleBoard.create(9))],
       player_turn: 'black',
       move_number: 55,
-      size: 9
+      size: 9,
+      result: 'incomplete'
     }
   }
 
@@ -51,9 +52,9 @@ describe('GameShowContainer', () => {
           players: {
             black: '',
             white: ''
-          }
-        },
-        gameCompleted: false
+          },
+          result: 'incomplete'
+        }
       })
     })
 
