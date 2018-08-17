@@ -6,6 +6,16 @@ class Game < ApplicationRecord
 
   after_create :create_empty_board_state
 
+  def winner
+    winner = nil
+    winner_id = self.winner_id
+    if winner_id != nil
+      winner = User.find(winner_id)
+    end
+
+    winner
+  end
+
   private
 
   def create_empty_board_state
