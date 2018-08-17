@@ -1,5 +1,5 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id, :legal_moves
+  attributes :id, :legal_moves, :result
 
   has_many :moves
   has_many :board_states
