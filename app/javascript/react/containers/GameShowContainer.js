@@ -117,7 +117,7 @@ class GameShowContainer extends React.Component {
           makeMove={this.makeMove}
         />
         <GameActionTile
-
+          makeMove={this.makeMove}
         />
       </div>
     )

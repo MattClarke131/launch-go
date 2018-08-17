@@ -26,6 +26,7 @@ class Api::V1::GamesController < ApplicationController
     game = Game.find(params[:id])
 
     if authorize_player(game)
+      move = {}
       if params[:type] === 'move' && authorize_move(game, params[:x], params[:y])
 
         move = {
@@ -33,8 +34,12 @@ class Api::V1::GamesController < ApplicationController
           x: params[:x],
           y: params[:y]
         }
-        update_game(game, move)
+      elsif params[:type] === 'pass'
+        move = {
+          type: 'pass',
+        }
       end
+      update_game(game, move)
     end
 
     render json: game
