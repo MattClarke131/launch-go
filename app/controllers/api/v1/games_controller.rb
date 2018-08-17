@@ -25,7 +25,7 @@ class Api::V1::GamesController < ApplicationController
   def update
     game = Game.find(params[:id])
 
-    if authorize_player(game)
+    if authorize_player(game) && !game.completed
       move = {}
       if params[:type] === 'move' && authorize_move(game, params[:x], params[:y])
 
@@ -34,19 +34,21 @@ class Api::V1::GamesController < ApplicationController
           x: params[:x],
           y: params[:y]
         }
+        update_game(game, move)
       elsif params[:type] === 'pass'
         move = {
           type: 'pass',
         }
+        update_game(game, move)
+      elsif params[:type] === 'resign'
+        resign_game(game)
       end
-      update_game(game, move)
     end
 
     render json: game
   end
 
   private
-
   def game_params
     params[:id].to_i
   end
@@ -78,20 +80,19 @@ class Api::V1::GamesController < ApplicationController
     newest_state = board_states[0]
     new_board = JSON.parse(newest_state.board)
     move_color = newest_state.move_number % 2 === 0 ? 'black' : 'white'
-    if move[:type] === 'move'
-      x = move[:x]
-      y = move[:y]
-      new_board[x][y] = move_color
-    elsif move[:type] === 'pass'
-      # do nothing
+    if move[:type] === 'move' || move[:type] === 'pass'
+      if move[:type] === 'move'
+        x = move[:x]
+        y = move[:y]
+        new_board[x][y] = move_color
+      end
+      new_board = JSON.generate(new_board)
+      new_state = BoardState.new(
+        game: game,
+        move_number: newest_state.move_number + 1,
+        board: new_board
+      )
     end
-    new_board = JSON.generate(new_board)
-    new_state = BoardState.new(
-      game: game,
-      move_number: newest_state.move_number + 1,
-      board: new_board
-    )
-
     new_state.save!
   end
 
