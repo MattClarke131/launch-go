@@ -127,5 +127,16 @@ class GameLogic
 
       total
     end
+
+    def empty_points(board)
+      legal_board = JSON.parse(BoardState.empty_board)
+      board.each_index do |x|
+        board.each_index do |y|
+          legal_board[x][y] = board[x][y] == legal_board[x][y]
+        end
+      end
+
+      legal_board
+    end
   end
 end
