@@ -105,8 +105,8 @@ div.challenges-container {
       margin-top: 5%;
     }
     .challenge-tile-value{
-      height: 80%;
-      margin-top: 5%;
+      height: 30%;
+      margin-top: 25px;
       font-size: 100%;
     }
   }
@@ -117,7 +117,8 @@ div.challenges-container {
   }
 
   h1 {
-    margin-left: 10%;
+    font-size: 30px;
+    margin-left: 5%;
   }
 
   .visitor-button {
@@ -125,9 +126,10 @@ div.challenges-container {
   }
   .delete-button {
     background-color: #E04040;
-    margin-left: 100%;
+    margin-left: 8%;
     margin-right: 0%;
     margin-top: 5%;
+    height: 50%;
   }
   .accept-button {
     background-color: #50C050;

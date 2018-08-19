@@ -16,15 +16,13 @@ const ChallengeButton = (props) => {
   }
 
   return(
-    <div>
-      <button
-        onClick={props.handleChallengeClick}
-        className={buttonClass}
-        value={props.challengeUser}
-      >
-        {buttonText}
-      </button>
-    </div>
+    <button
+      onClick={props.handleChallengeClick}
+      className={buttonClass}
+      value={props.challengeUser}
+    >
+      {buttonText}
+    </button>
   )
 }
 
