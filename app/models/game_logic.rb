@@ -98,9 +98,12 @@ class GameLogic
     end
 
     def is_self_capture?(board, point)
-      group_tuoches_color?(
-        board,
-        group(board, point),
+      new_board = board
+      new_board[point[:x]][point[:y]] = point[:color]
+
+      !group_touches_color?(
+        new_board,
+        group(new_board, point),
         'empty',
       )
     end
