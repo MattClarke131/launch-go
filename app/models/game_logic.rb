@@ -138,7 +138,7 @@ class GameLogic
       total
     end
 
-    def legal_moves(board, color))
+    def legal_moves(board, color)
       # Only empty spaces are legal
       legal_board = empty_points(board)
 
