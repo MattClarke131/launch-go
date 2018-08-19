@@ -108,7 +108,7 @@ class GameLogic
     end
 
     def is_self_capture?(board, point)
-      new_board = board
+      new_board = JSON.parse(board)
       new_board[point[:x]][point[:y]] = point[:color]
 
       !group_touches_color?(
@@ -150,6 +150,7 @@ class GameLogic
 
     def empty_points(board)
       legal_board = JSON.parse(BoardState.empty_board)
+      board = JSON.parse(board)
       board.each_index do |x|
         board.each_index do |y|
           legal_board[x][y] = board[x][y] == legal_board[x][y]
