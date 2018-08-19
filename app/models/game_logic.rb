@@ -27,10 +27,20 @@ class GameLogic
 
     def neighbors(board, point)
       neighbor_points = []
-      neighbor_points << {x: point[:x]+1, point[:y]} if point[:x] < board.length
-      neighbor_points << {x: point[:x]-1, point[:y]} if point[:x] > 0
-      neighbor_points << {x: point[:x], point[:y]+1} if point[:y] < board.length
-      neighbor_points << {x: point[:x], point[:y]-1} if point[:y] > 0
+      if point[:x] < board.length
+        neighbor_points << {x: point[:x]+1, y: point[:y]}
+      end
+      if point[:x] > 0
+        neighbor_points << {x: point[:x]-1, y: point[:y]}
+      end
+
+      if point[:y] < board.length
+        neighbor_points << {x: point[:x], y: point[:y]+1}
+      end
+
+      if point[:y] > 0
+        neighbor_points << {x: point[:x], y: point[:y]-1}
+      end
 
       neighbor_points
     end
