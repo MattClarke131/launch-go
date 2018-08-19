@@ -132,6 +132,9 @@ class GameLogic
       # Only empty spaces are legal
       legal_board = empty_points(board)
 
+      # Self capture is illegal
+      legal_board = not_self_capture(legal_board, board, color)
+
       legal_board
     end
 
@@ -140,6 +143,18 @@ class GameLogic
       board.each_index do |x|
         board.each_index do |y|
           legal_board[x][y] = board[x][y] == legal_board[x][y]
+        end
+      end
+
+      legal_board
+    end
+
+    def not_self_capture(legal_board, board, color)
+      for x in 0..(legal_board.length - 1)
+        for y in 0..(legal_board.length - 1)
+          if(legal_board[x][y])
+            legal_board[x][y] = is_self_capture?(board, {x:x, y:y, color:color})
+          end
         end
       end
 
