@@ -128,6 +128,13 @@ class GameLogic
       total
     end
 
+    def legal_moves(board, color))
+      # Only empty spaces are legal
+      legal_board = empty_points(board)
+
+      legal_board
+    end
+
     def empty_points(board)
       legal_board = JSON.parse(BoardState.empty_board)
       board.each_index do |x|
