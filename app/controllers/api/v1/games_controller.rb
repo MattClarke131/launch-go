@@ -80,17 +80,24 @@ class Api::V1::GamesController < ApplicationController
     newest_state = board_states[0]
     new_board = JSON.parse(newest_state.board)
     move_color = newest_state.move_number % 2 === 0 ? 'black' : 'white'
+    next_move_color = move_color === 'black' ? 'white' : 'black'
     if move[:type] === 'move' || move[:type] === 'pass'
       if move[:type] === 'move'
         x = move[:x]
         y = move[:y]
         new_board[x][y] = move_color
+        new_board = GameLogic.remove_captures(new_board, {
+          x: move[:x],
+          y: move[:y],
+          color: move_color
+        })
       end
       new_board = JSON.generate(new_board)
       new_state = BoardState.new(
         game: game,
         move_number: newest_state.move_number + 1,
-        board: new_board
+        board: new_board,
+        legal_moves: GameLogic.legal_moves(new_board, next_move_color)
       )
     end
     new_state.save!
