@@ -1,10 +1,8 @@
 class GameSerializer < ActiveModel::Serializer
   attributes :id, :result
 
-  has_many :moves
   has_many :board_states
   has_many :players
-
 
   def board_states
     result = object.board_states.order('move_number DESC')
