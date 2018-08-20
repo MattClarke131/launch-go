@@ -27,13 +27,13 @@ class GameShowContainer extends React.Component {
   }
 
   listenForUpdate() {
-    let delay = 250
-    if(!this.state.gameCompleted) {
-      this.updateBoard()
-      window.setTimeout(() => {
-        this.listenForUpdate()
-      }, delay)
-    }
+    // let delay = 250
+    // if(!this.state.gameCompleted) {
+    //   this.updateBoard()
+    //   window.setTimeout(() => {
+    //     this.listenForUpdate()
+    //   }, delay)
+    // }
   }
 
   generateEmptyBoardState() {

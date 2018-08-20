@@ -16,7 +16,7 @@ class GameLogic
         if group[0][:color] == enemy_color
           if !group_touches_color?(board, group, 'empty')
             group.each do |p|
-              new_board = set_point(board, new_point, 'empty')
+              new_board = set_point(board, p, 'empty')
             end
           end
         end
