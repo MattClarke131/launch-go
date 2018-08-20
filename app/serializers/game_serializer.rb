@@ -6,10 +6,12 @@ class GameSerializer < ActiveModel::Serializer
 
   def board_states
     result = object.board_states.order('move_number DESC')
-    result.map do |board_state|
+    output = result.map do |board_state|
       new_state = board_state
       new_state['board'] = JSON.parse(new_state['board'])
     end
+
+    output
   end
 
   def players
