@@ -104,7 +104,6 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def resign_game(game)
-    binding.pry
     active_player = User.current_user
     winner = game.pairings.select { |p| p.user_id != active_player.id }[0]
     winner = winner.user
