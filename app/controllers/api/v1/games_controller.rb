@@ -28,7 +28,6 @@ class Api::V1::GamesController < ApplicationController
     if authorize_player(game) && !game.completed
       move = {}
       if params[:type] === 'move' && authorize_move(game, params[:x], params[:y])
-
         move = {
           type: 'move',
           x: params[:x],
@@ -60,9 +59,10 @@ class Api::V1::GamesController < ApplicationController
   def authorize_move(game, x, y)
     board_states = game.board_states.order('move_number DESC')
     newest_state = board_states[0]
-    board = JSON.parse(newest_state.board)
+    newest_board = newest_state.legal_moves
+    newest_board = JSON.parse(newest_board)
 
-    Game.move_is_legal?(board, x, y)
+    newest_board[x][y]
   end
 
   def authorize_player(game)
