@@ -111,7 +111,7 @@ class GameLogic
     def color_in_neighbors?(board, point, color)
       neighbors = neighbors(board, point)
 
-      neighbors.any? { |p| point[:color] == color }
+      neighbors.any? { |p| p[:color] == color }
     end
 
     def set_point(board, point, color)
