@@ -22,7 +22,8 @@ class Game < ApplicationRecord
     BoardState.create!(
       game: self,
       move_number: 0,
-      board: BoardState.empty_board
+      board: BoardState.empty_board,
+      legal_moves: BoardState.init_legal_moves
     )
   end
 
