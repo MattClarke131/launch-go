@@ -15,15 +15,5 @@ RSpec.describe Api::V1::GamesController, type: :controller do
 
       expect(returned_json['game']['id']).to eq(game_1.id)
     end
-
-    it 'should return moves associated with the game' do
-      get :show, params: { id: game_1.id }
-      returned_json = JSON.parse(response.body)
-
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq('application/json')
-
-      expect(returned_json['game']['moves'].length).to eq(game_1.moves.length)
-    end
   end
 end
