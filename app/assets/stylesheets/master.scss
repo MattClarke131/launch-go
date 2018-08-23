@@ -9,9 +9,13 @@ $title-background: $white-smoke;
 
 // responsive design
 $break-small: 600px;
-$break-large: 700px;
+$break-large: 600px;
 
 html, body, #app, div {
   height: 100%;
   background-color: $primary-background;
+}
+
+.flash {
+  height: 20px;
 }
