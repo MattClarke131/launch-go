@@ -255,5 +255,25 @@ RSpec. describe GameLogic, type: :model do
         GameLogic.legal_moves(empty_board, 'black')[0][0]
       ).to be true
     end
+
+    it 'sets full coordinates to false' do
+      expect(
+        GameLogic.legal_moves(test_board_00, 'black')[0][0]
+      ).to be false
+    end
+    it ' correctly accounts for self capture being illegal' do
+      expect(
+        GameLogic.legal_moves(test_board_self_capture, 'white')[0][0]
+      ).to be false
+      expect(
+        GameLogic.legal_moves(test_board_self_capture, 'white')[1][1]
+      ).to be false
+      expect(
+        GameLogic.legal_moves(test_board_self_capture, 'white')[2][2]
+      ).to be true
+      expect(
+        GameLogic.legal_moves(test_board_self_capture, 'black')[0][0]
+      ).to be true
+    end
   end
 end
