@@ -162,7 +162,7 @@ class GameLogic
       legal_board = empty_points(board)
 
       # Self capture is illegal
-      # legal_board = not_self_capture(legal_board, board, color)
+      legal_board = not_self_capture(legal_board, board, color)
 
       legal_board
     end
