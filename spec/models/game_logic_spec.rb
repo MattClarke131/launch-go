@@ -176,6 +176,28 @@ RSpec. describe GameLogic, type: :model do
     end
   end
 
+  describe 'color_in_neighbors' do
+    it 'returns false on capture' do
+      expect(
+        GameLogic.color_in_neighbors?(
+          test_board_dead,
+          {x:0,y:0,color:'black'},
+          'empty'
+        )
+      )
+    end
+
+    it 'returns true on a group with liberties' do
+      expect(
+        GameLogic.color_in_neighbors?(
+          test_board_00,
+          {x:0,y:0,color:'black'},
+          'empty'
+        )
+      )
+    end
+  end
+
   describe 'set point' do
     it 'changes a board point to black' do
       new_board = GameLogic.set_point(
