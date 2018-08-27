@@ -37,6 +37,13 @@ RSpec. describe GameLogic, type: :model do
 
     points
   end
+  let!(:points_01) do
+    points = []
+    points << {x:0, y:0, color:'black'}
+    points << {x:0, y:1, color:'white'}
+
+    points
+  end
 
   describe 'neighbors' do
     it 'returns 2 neighbors for a corner point' do
@@ -103,6 +110,20 @@ RSpec. describe GameLogic, type: :model do
       expect(
         GameLogic.points_of_color(points_00, 'empty')[0][:color]
       ).to eq 'empty'
+    end
+  end
+
+  describe 'filter_points_by_points' do
+    it 'returns an empty array on filtering self' do
+      expect(
+        GameLogic.filter_points_by_points(points_00, points_00).length
+      ).to eq 0
+    end
+
+    it 'returns points only in first array' do
+      expect(
+        GameLogic.filter_points_by_points(points_00, points_01).length
+      ).to eq 2
     end
   end
 
