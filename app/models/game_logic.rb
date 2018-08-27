@@ -183,7 +183,7 @@ class GameLogic
       for x in 0..(legal_board.length - 1)
         for y in 0..(legal_board.length - 1)
           if(legal_board[x][y])
-            legal_board[x][y] = is_self_capture?(board, {x:x, y:y, color:color})
+            legal_board[x][y] = !is_self_capture?(board, {x:x, y:y, color:color})
           end
         end
       end
