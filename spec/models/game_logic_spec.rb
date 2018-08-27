@@ -248,4 +248,12 @@ RSpec. describe GameLogic, type: :model do
       ).to be false
     end
   end
+
+  describe 'legal_moves' do
+    it 'returns a nested array of booleans' do
+      expect(
+        GameLogic.legal_moves(empty_board, 'black')[0][0]
+      ).to be true
+    end
+  end
 end
