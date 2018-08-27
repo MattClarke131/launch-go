@@ -36,6 +36,15 @@ RSpec. describe GameLogic, type: :model do
 
     new_board
   end
+  let!(:test_board_self_capture) do
+    new_board = JSON.parse(BoardState.empty_board)
+    new_board[0][1] = 'black'
+    new_board[1][0] = 'black'
+    new_board[2][1] = 'black'
+    new_board[1][2] = 'black'
+
+    new_board
+  end
   let!(:points_00) do
     points = []
     points << {x:0, y:0, color:'black'}
@@ -218,6 +227,25 @@ RSpec. describe GameLogic, type: :model do
         test_board_00, {x:0, y:0, color:'empty'}
       )
       expect(test_board_00[0][0]).to eq 'empty'
+    end
+  end
+
+  describe 'is_self_capture?' do
+    it 'returns true when a move would be self captured' do
+      expect(
+        GameLogic.is_self_capture?(
+          test_board_self_capture,
+          {x:1,y:1,color:'white'}
+        )
+      ).to be true
+    end
+    it 'returns false when a move would not be self captured' do
+      expect(
+        GameLogic.is_self_capture?(
+          test_board_self_capture,
+          {x:1,y:1,color:'black'}
+        )
+      ).to be false
     end
   end
 end
