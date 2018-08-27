@@ -8,6 +8,14 @@ RSpec. describe GameLogic, type: :model do
 
     new_board
   end
+  let!(:test_board_dead) do
+    new_board = JSON.parse(BoardState.empty_board)
+    new_board[0][0] = 'black'
+    new_board[0][1] = 'white'
+    new_board[1][0] = 'white'
+
+    new_board
+  end
   let!(:test_board_group_00) do
     new_board = JSON.parse(BoardState.empty_board)
     for x in 0..3
@@ -106,6 +114,7 @@ RSpec. describe GameLogic, type: :model do
         GameLogic.points_of_color(points_00, 'empty').length
       ).to eq 1
     end
+
     it 'returns points of the correct color' do
       expect(
         GameLogic.points_of_color(points_00, 'empty')[0][:color]
@@ -133,14 +142,36 @@ RSpec. describe GameLogic, type: :model do
         GameLogic.point_in_array?({x:0,y:0,color:'black'}, [])
       ).to be false
     end
+
     it 'returns true if point is in array' do
       expect(
         GameLogic.point_in_array?({x:0,y:0,color:'black'}, points_00)
       ).to be true
     end
+
     it 'returns false if point is not in array' do
       expect(
         GameLogic.point_in_array?({x:4,y:4,color:'black'}, points_00)
+      ).to be false
+    end
+  end
+
+  describe 'group_touches_color?' do
+    it 'returns true when a group has liberties' do
+      corner_stone_group = [{x:0, y:0, color:'black'}]
+      expect(
+        GameLogic.group_touches_color?(
+          test_board_00, corner_stone_group, 'empty'
+        )
+      ).to be true
+    end
+
+    it 'returns false when a group has no liberties' do
+      corner_stone_group = [{x:0, y:0, color:'black'}]
+      expect(
+        GameLogic.group_touches_color?(
+          test_board_dead, corner_stone_group, 'empty'
+        )
       ).to be false
     end
   end
