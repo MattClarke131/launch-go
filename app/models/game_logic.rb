@@ -16,7 +16,12 @@ class GameLogic
         if group[0][:color] == enemy_color
           if !group_touches_color?(board, group, 'empty')
             group.each do |p|
-              new_board = set_point(board, p, 'empty')
+              new_point = {
+                x: p[:x],
+                y: p[:y],
+                color: 'empty'
+              }
+              new_board = set_point(board, new_point)
             end
           end
         end
@@ -114,9 +119,9 @@ class GameLogic
       neighbors.any? { |p| p[:color] == color }
     end
 
-    def set_point(board, point, color)
+    def set_point(board, point)
       new_board = board
-      new_board[point[:x]][point[:y]] = color
+      new_board[point[:x]][point[:y]] = point[:color]
 
       new_board
     end
