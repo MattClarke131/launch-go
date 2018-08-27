@@ -28,6 +28,15 @@ RSpec. describe GameLogic, type: :model do
 
     new_board
   end
+  let!(:points_00) do
+    points = []
+    points << {x:0, y:0, color:'black'}
+    points << {x:0, y:1, color:'white'}
+    points << {x:0, y:2, color:'empty'}
+    points << {x:0, y:3, color:'black'}
+
+    points
+  end
 
   describe 'neighbors' do
     it 'returns 2 neighbors for a corner point' do
@@ -81,6 +90,19 @@ RSpec. describe GameLogic, type: :model do
       expect(
         GameLogic.group(test_board_group_01, {x:2,y:1,color:'black'}).length
       ).to eq 3
+    end
+  end
+
+  describe 'points_of_color' do
+    it 'removes all non-empty points from an array' do
+      expect(
+        GameLogic.points_of_color(points_00, 'empty').length
+      ).to eq 1
+    end
+    it 'returns points of the correct color' do
+      expect(
+        GameLogic.points_of_color(points_00, 'empty')[0][:color]
+      ).to eq 'empty'
     end
   end
 
