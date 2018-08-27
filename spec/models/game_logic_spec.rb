@@ -127,6 +127,24 @@ RSpec. describe GameLogic, type: :model do
     end
   end
 
+  describe 'point_in_array?' do
+    it 'returns false on empty array' do
+      expect(
+        GameLogic.point_in_array?({x:0,y:0,color:'black'}, [])
+      ).to be false
+    end
+    it 'returns true if point is in array' do
+      expect(
+        GameLogic.point_in_array?({x:0,y:0,color:'black'}, points_00)
+      ).to be true
+    end
+    it 'returns false if point is not in array' do
+      expect(
+        GameLogic.point_in_array?({x:4,y:4,color:'black'}, points_00)
+      ).to be false
+    end
+  end
+
   describe 'set point' do
     it 'changes a board point to black' do
       new_board = GameLogic.set_point(
