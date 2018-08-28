@@ -16,7 +16,12 @@ class GameLogic
         if group[0][:color] == enemy_color
           if !group_touches_color?(board, group, 'empty')
             group.each do |p|
-              new_board = set_point(board, p, 'empty')
+              new_point = {
+                x: p[:x],
+                y: p[:y],
+                color: 'empty'
+              }
+              new_board = set_point(board, new_point)
             end
           end
         end
@@ -114,15 +119,15 @@ class GameLogic
       neighbors.any? { |p| p[:color] == color }
     end
 
-    def set_point(board, point, color)
+    def set_point(board, point)
       new_board = board
-      new_board[point[:x]][point[:y]] = color
+      new_board[point[:x]][point[:y]] = point[:color]
 
       new_board
     end
 
     def is_self_capture?(board, point)
-      new_board = JSON.parse(board)
+      new_board = JSON.parse(JSON.generate(board))
       new_board[point[:x]][point[:y]] = point[:color]
 
       !group_touches_color?(
@@ -157,14 +162,14 @@ class GameLogic
       legal_board = empty_points(board)
 
       # Self capture is illegal
-      # legal_board = not_self_capture(legal_board, board, color)
+      legal_board = not_self_capture(legal_board, board, color)
 
       legal_board
     end
 
     def empty_points(board)
       legal_board = JSON.parse(BoardState.empty_board)
-      board = JSON.parse(board)
+
       board.each_index do |x|
         board.each_index do |y|
           legal_board[x][y] = board[x][y] == legal_board[x][y]
@@ -178,7 +183,7 @@ class GameLogic
       for x in 0..(legal_board.length - 1)
         for y in 0..(legal_board.length - 1)
           if(legal_board[x][y])
-            legal_board[x][y] = is_self_capture?(board, {x:x, y:y, color:color})
+            legal_board[x][y] = !is_self_capture?(board, {x:x, y:y, color:color})
           end
         end
       end

@@ -92,7 +92,7 @@ class Api::V1::GamesController < ApplicationController
           color: move_color
         })
       end
-      new_board = JSON.generate(new_board)
+
       new_state = BoardState.new(
         game: game,
         move_number: newest_state.move_number + 1,
